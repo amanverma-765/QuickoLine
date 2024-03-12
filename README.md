@@ -1,4 +1,4 @@
-# QuickoScraper
+# QuickoLine
 
 ***Mobile App for Quickoline***
 

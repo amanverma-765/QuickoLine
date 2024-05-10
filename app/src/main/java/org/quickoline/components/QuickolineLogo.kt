@@ -17,7 +17,7 @@ fun QuickolineLogo(modifier: Modifier = Modifier) {
         text = buildAnnotatedString {
             withStyle(
                 style = SpanStyle(
-                    color = MaterialTheme.colorScheme.primary,
+                    color = MaterialTheme.colorScheme.surfaceTint,
                     fontWeight = FontWeight.Bold
                 )
             ) {
@@ -25,7 +25,7 @@ fun QuickolineLogo(modifier: Modifier = Modifier) {
             }
             withStyle(
                 style = SpanStyle(
-                    color = MaterialTheme.colorScheme.secondary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
             ) {

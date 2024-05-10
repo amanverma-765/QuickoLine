@@ -26,7 +26,6 @@ fun RootNavHost(modifier: Modifier = Modifier) {
 
         tabGraph<RootDestinations.TabGraph>(tabNavigator = tabNavigator)
 
-
     }
 
 }

@@ -1,21 +1,23 @@
 package org.quickoline.navigation.tabs
 
-import android.annotation.SuppressLint
-import android.util.Log
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -31,25 +33,31 @@ internal inline fun <reified T : Any> NavGraphBuilder.tabGraph(
 
     composable<T> {
 
-        val navItems = listOf(
-            TabDestinations.HomeTab,
-            TabDestinations.ActivityTab
-        )
-
         val backStackEntry = tabNavigator.currentBackStackEntryAsState().value
         val currentDestination = backStackEntry?.destination
+        val context = LocalContext.current
 
         Scaffold(
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.statusBars),
             bottomBar = {
-
-                NavigationBar(modifier = Modifier.fillMaxWidth()) {
-                    navItems.forEach { tab ->
+                NavigationBar(
+                    contentColor = Color.Transparent,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    tabItems(context).forEach { tab ->
                         AddTabItem(
                             tab = tab,
-                            onTabClicked = { tabNavigator.navigate(tab) },
-                            isTabSelected = currentDestination?.hierarchy?.any {
-                                it.hasRoute(tab::class)
+                            onTabClicked = {
+                                tabNavigator.navigate(tab.destination) {
+                                    launchSingleTop = true
+                                    restoreState = true
+                                    popUpTo(tabNavigator.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                }
+                            },
+                            tabSelected = currentDestination?.hierarchy?.any {
+                                it.hasRoute(tab.destination::class)
                             } == true
                         )
                     }
@@ -60,6 +68,12 @@ internal inline fun <reified T : Any> NavGraphBuilder.tabGraph(
             NavHost(
                 navController = tabNavigator,
                 startDestination = TabDestinations.HomeTab,
+
+                enterTransition = { scaleIn(initialScale = 0.8f) + fadeIn() },
+                popEnterTransition = { scaleIn(initialScale = 0.8f) + fadeIn() },
+                popExitTransition = { fadeOut() },
+                exitTransition = { fadeOut() },
+
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(padding)
@@ -68,7 +82,6 @@ internal inline fun <reified T : Any> NavGraphBuilder.tabGraph(
                 homeGraph<TabDestinations.HomeTab>()
 
                 activityGraph<TabDestinations.ActivityTab>()
-
             }
         }
     }

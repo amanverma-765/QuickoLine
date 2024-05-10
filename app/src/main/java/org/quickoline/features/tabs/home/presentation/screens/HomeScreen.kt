@@ -7,17 +7,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import org.quickoline.components.QuickTopAppBar
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeScreen(modifier: Modifier = Modifier) {
 
     Scaffold(
-
-        topBar = {
-            TopAppBar(title = { Text(text = "ahsjjahshjha") })
-        }
-
+        topBar = { QuickTopAppBar() }
     ) { padding ->
 
         LazyColumn(

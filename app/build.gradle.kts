@@ -73,4 +73,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
+    // Material Kolor
+    implementation(libs.material.kolor)
+
 }

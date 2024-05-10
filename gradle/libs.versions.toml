@@ -11,6 +11,7 @@ composeBom = "2024.05.00"
 
 kotlinxSerializationJson = "1.6.3"
 ktxSerialization = "1.9.24"
+materialKolor = "1.4.4"
 navigationCompose = "2.8.0-alpha08"
 
 
@@ -32,6 +33,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+material-kolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

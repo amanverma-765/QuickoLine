@@ -28,7 +28,7 @@ fun WorkInProgress(modifier: Modifier = Modifier) {
         modifier = modifier.fillMaxSize()
     ) {
 
-        val tintColor = MaterialTheme.colorScheme.surfaceTint.darken(1.2f)
+        val tintColor = MaterialTheme.colorScheme.surfaceTint.darken(1.5f)
 
         Image(
             modifier = Modifier.padding(24.dp),

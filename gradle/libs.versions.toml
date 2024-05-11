@@ -11,12 +11,14 @@ composeBom = "2024.05.00"
 
 kotlinxSerializationJson = "1.6.3"
 ktxSerialization = "1.9.24"
+materialIconsExtendedAndroid = "1.6.7"
 materialKolor = "1.4.4"
 navigationCompose = "2.8.0-alpha08"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtendedAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

@@ -6,8 +6,8 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.ShoppingCart
-import androidx.compose.ui.graphics.vector.ImageVector
 import org.quickoline.R
+import org.quickoline.components.NavItems
 
 
 internal fun tabItems(context: Context): List<NavItems> {
@@ -27,10 +27,3 @@ internal fun tabItems(context: Context): List<NavItems> {
         )
     )
 }
-
-data class NavItems(
-    val destination: TabDestinations,
-    val title: String,
-    val filledIcon: ImageVector,
-    val outlinedIcon: ImageVector
-)

@@ -40,10 +40,7 @@ internal inline fun <reified T : Any> NavGraphBuilder.tabGraph(
         Scaffold(
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets.exclude(WindowInsets.statusBars),
             bottomBar = {
-                NavigationBar(
-                    contentColor = Color.Transparent,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
+                NavigationBar(contentColor = Color.Transparent) {
                     tabItems(context).forEach { tab ->
                         AddTabItem(
                             tab = tab,
@@ -69,8 +66,8 @@ internal inline fun <reified T : Any> NavGraphBuilder.tabGraph(
                 navController = tabNavigator,
                 startDestination = TabDestinations.HomeTab,
 
-                enterTransition = { scaleIn(initialScale = 0.8f) + fadeIn() },
-                popEnterTransition = { scaleIn(initialScale = 0.8f) + fadeIn() },
+                enterTransition = { scaleIn(initialScale = 0.7f) + fadeIn() },
+                popEnterTransition = { scaleIn(initialScale = 0.7f) + fadeIn() },
                 popExitTransition = { fadeOut() },
                 exitTransition = { fadeOut() },
 

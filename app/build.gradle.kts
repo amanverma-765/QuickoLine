@@ -75,5 +75,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Material Kolor
     implementation(libs.material.kolor)
+    // Material Extended Icons
+    implementation(libs.androidx.material.icons.extended.android)
 
 }

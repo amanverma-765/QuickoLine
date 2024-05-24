@@ -4,28 +4,27 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import org.quickoline.features.tabs.home.navigation.homeGraph
-import org.quickoline.features.onboarding.navigation.onBoardingGraph
-import org.quickoline.navigation.tabs.tabGraph
+import org.quickoline.activity.navigation.activityGraph
+import org.quickoline.home.navigation.homeGraph
+import org.quickoline.onboarding.navigation.onBoardingGraph
 
 @Composable
 fun RootNavHost(modifier: Modifier = Modifier) {
 
     val rootNavigator = rememberNavController()
-    val tabNavigator = rememberNavController()
 
     NavHost(
         navController = rootNavigator,
-        startDestination = RootDestinations.TabGraph,
+        startDestination = org.quickoline.home.navigation.HomeGraph,
         modifier = modifier.fillMaxSize()
-        ) {
+    ) {
 
-        onBoardingGraph<RootDestinations.OnBoardingGraph>()
+        onBoardingGraph(navigator = rootNavigator)
 
-        tabGraph<RootDestinations.TabGraph>(tabNavigator = tabNavigator)
+        homeGraph(navigator = rootNavigator)
+
+        activityGraph(navigator = rootNavigator)
 
     }
-
 }

@@ -1,9 +1,3 @@
 <resources>
     <string name="app_name">QuickoLine</string>
-    <string name="home_tab">Dashboard</string>
-    <string name="activities_tab">Activities</string>
-    <string name="work_in_progress">Work in Progress!</string>
-    <string name="search_here">Search here...</string>
-    <string name="search">Search</string>
-    <string name="microphone">Microphone</string>
 </resources>

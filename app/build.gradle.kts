@@ -68,14 +68,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
     // Ktx - Serialization
     implementation(libs.kotlinx.serialization.json)
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-    // Material Kolor
-    implementation(libs.material.kolor)
     // Material Extended Icons
     implementation(libs.androidx.material.icons.extended.android)
+    implementation(project(":features:onboarding"))
+    implementation(project(":features:home"))
+    implementation(project(":features:activity"))
+    implementation(project(":core:ui"))
 
 }

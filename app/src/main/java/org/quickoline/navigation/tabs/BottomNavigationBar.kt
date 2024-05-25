@@ -1,35 +1,30 @@
-package org.quickoline.navigation.tabs.components
+package org.quickoline.navigation.tabs
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination.Companion.hasRoute
-import androidx.navigation.compose.currentBackStackEntryAsState
-import org.quickoline.navigation.tabs.TabDestinations
 
 
 @Composable
 fun BottomNavigationBar(
     modifier: Modifier = Modifier,
-    tabNavigator: NavController,
-    onTabClicked: (TabDestinations) -> Unit,
+    selectedTab: NavItem,
+    onTabClicked: (Any) -> Unit,
 ) {
 
-    val backStack = tabNavigator.currentBackStackEntryAsState()
-    val destination = backStack.value?.destination
+//    val backStack = tabNavigator.currentBackStackEntryAsState()
+//    val destination = backStack.value?.destination
 
-    val selectedTab = remember(destination) {
-        navigationTabs.find { tab ->
-            destination?.hasRoute(tab.destination::class) == true
-        }
-    }
+//    val selectedTab = remember(destination) {
+//        navigationTabs.find { tab ->
+//            destination?.hasRoute(tab.destination::class) == true
+//        }
+//    }
 
     NavigationBar(modifier = modifier) {
         navigationTabs.forEach { tab ->

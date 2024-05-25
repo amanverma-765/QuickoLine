@@ -1,24 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
 android {
-    namespace = "org.quickoline"
+    namespace = "org.quickoline.webview"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "org.quickoline"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -28,7 +22,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -44,16 +37,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -72,12 +61,5 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-    // Material Extended Icons
-    implementation(libs.androidx.material.icons.extended.android)
-    implementation(project(":features:onboarding"))
-    implementation(project(":features:home"))
-    implementation(project(":features:activity"))
     implementation(project(":core:ui"))
-    implementation(project(":features:webview"))
-
 }

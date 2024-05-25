@@ -6,4 +6,9 @@
     <string name="search">Search</string>
     <string name="microphone">Microphone</string>
     <string name="docs_tab">QuickDocs</string>
+    <string name="quickoline_slogan">Online Boolein to Quickoline!</string>
+    <string name="onboarding_title">Your Online, Cyber Cafe</string>
+    <string name="onboarding_disc">Get your online works done quickly without visiting offline centres.</string>
+    <string name="onboarding_get_started">Get Started</string>
+    <string name="our_policies">Our Policies</string>
 </resources>

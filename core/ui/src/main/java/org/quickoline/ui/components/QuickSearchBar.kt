@@ -85,7 +85,5 @@ fun QuickSearchBar(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = animatedHorizontalPadding.value)
-    ) {
-
-    }
+    ) { }
 }

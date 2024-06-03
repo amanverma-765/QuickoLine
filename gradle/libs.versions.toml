@@ -5,17 +5,19 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.8.0"
+lifecycleRuntimeKtx = "2.8.1"
 activityCompose = "1.9.0"
 composeBom = "2024.05.00"
 # Custom Added
 kotlinxSerializationJson = "1.6.3"
 ktxSerialization = "2.0.0"
 materialIconsExtendedAndroid = "1.6.7"
-materialKolor = "1.5.1"
-navigationCompose = "2.8.0-beta01"
-appcompat = "1.6.1"
-material = "1.12.0"
+materialKolor = "1.6.0"
+navigationCompose = "2.8.0-beta02"
+appcompat = "1.7.0"
+datastorePreferences = "1.1.1"
+koinBom = "3.6.0-Beta4"
+coreSplashscreen = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,11 +40,17 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 material-kolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
 androidx-material-icons-extended-android = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtendedAndroid" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+koin-bom = { module = "io.insert-koin:koin-bom", name = "koin-bom", version.ref = "koinBom" }
+koin-android = { module = "io.insert-koin:koin-android", name = "koin-android" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", name = "koin-compose" }
+koin-core = { module = "io.insert-koin:koin-core", name = "koin-core" }
+koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines", name = "koin-coroutines" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+# Custom Added
 jetbrains-kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "ktxSerialization" }
 android-library = { id = "com.android.library", version.ref = "agp" }

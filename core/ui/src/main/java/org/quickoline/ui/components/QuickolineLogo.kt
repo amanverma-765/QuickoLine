@@ -21,7 +21,7 @@ fun QuickolineLogo(
             withStyle(
                 style = logoStyle.toSpanStyle().merge(
                     SpanStyle(
-                        color = MaterialTheme.colorScheme.surfaceTint,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold
                     )
                 )
@@ -31,7 +31,7 @@ fun QuickolineLogo(
             withStyle(
                 style = logoStyle.toSpanStyle().merge(
                     SpanStyle(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.tertiary,
                         fontWeight = FontWeight.Bold
                     )
                 )

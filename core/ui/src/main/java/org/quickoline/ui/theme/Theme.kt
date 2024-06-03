@@ -10,7 +10,7 @@ import com.materialkolor.rememberDynamicColorScheme
 
 @Composable
 fun QuickoLineTheme(
-    seedColor: Color = Color.Blue,
+    seedColor: Color = Color.White,
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

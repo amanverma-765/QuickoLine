@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.PersonAdd
 import androidx.compose.material.icons.twotone.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,6 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -55,6 +57,12 @@ fun QuickTopAppBar(
                         .aspectRatio(1f)
                         .clip(CircleShape)
                 ) {
+                    Icon(
+                        imageVector = Icons.Rounded.PersonAdd,
+                        contentDescription = "login user",
+                        modifier = Modifier.padding(8.dp).alpha(.5f),
+                    )
+
                     // Profile Picture here
                 }
             }

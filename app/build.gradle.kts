@@ -74,6 +74,15 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     // Material Extended Icons
     implementation(libs.androidx.material.icons.extended.android)
+    // Splash - Api
+    implementation(libs.androidx.core.splashscreen)
+    // Koin - DI
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.core.coroutines)
+
     implementation(project(":features:onboarding"))
     implementation(project(":features:home"))
     implementation(project(":features:activity"))

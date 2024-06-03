@@ -62,4 +62,5 @@ dependencies {
     // Navigation Compose
     implementation(libs.androidx.navigation.compose)
     implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
 }

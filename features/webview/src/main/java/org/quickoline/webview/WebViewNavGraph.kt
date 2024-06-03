@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
+import org.quickoline.utils.canNavigate
 
 @Serializable
 data class WebViewGraph(val url: String)
@@ -19,7 +20,9 @@ fun NavGraphBuilder.webViewGraph(
 
         WebViewScreen(
             url = url,
-            onNavigateBack = { navigator.popBackStack() }
+            onNavigateBack = {
+                if (navigator.canNavigate()) navigator.popBackStack()
+            }
         )
     }
 

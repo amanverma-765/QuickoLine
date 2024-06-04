@@ -10,12 +10,16 @@ import androidx.compose.ui.Modifier
 import org.quickoline.home.presentation.components.CategoryCardGrid
 import org.quickoline.home.presentation.components.ListItemsCard
 import org.quickoline.home.presentation.components.TopBarWithSearchbar
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.home.presentation.viewmodel.home.HomeUiEvents
+import org.quickoline.home.presentation.viewmodel.home.HomeUiStates
+import org.quickoline.ui.theme.smallPadding
 
 @Composable
 internal fun HomeScreen(
     modifier: Modifier = Modifier,
-    onNavigateToListScreen: () -> Unit
+    uiEvents: (HomeUiEvents) -> Unit,
+    uiStates: HomeUiStates,
+    navigateToPostListScreen: () -> Unit
 ) {
 
     val lazyState = rememberLazyListState()
@@ -27,17 +31,19 @@ internal fun HomeScreen(
 
         LazyColumn(
             state = lazyState,
-            verticalArrangement = Arrangement.spacedBy(standardPadding),
+            verticalArrangement = Arrangement.spacedBy(smallPadding),
             contentPadding = padding,
             modifier = Modifier.fillMaxSize()
         ) {
 
             item {
-                CategoryCardGrid()
+                CategoryCardGrid(
+                    onClick = { navigateToPostListScreen() }
+                )
             }
 
             items(50) {
-               ListItemsCard()
+                ListItemsCard()
             }
         }
     }

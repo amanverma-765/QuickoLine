@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.quickoline.ui.R
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.ui.theme.smallPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -39,7 +39,7 @@ fun QuickSearchBar(
     var active by remember { mutableStateOf(false) }
 
     val animatedHorizontalPadding = animateDpAsState(
-        targetValue = if (active) 0.dp else standardPadding,
+        targetValue = if (active) 0.dp else smallPadding,
         label = "Animating Horizontal Padding"
     )
 

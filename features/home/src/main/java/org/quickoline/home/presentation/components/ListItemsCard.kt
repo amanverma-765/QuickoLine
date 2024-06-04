@@ -6,14 +6,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.ui.theme.smallPadding
 
 @Composable
 internal fun ListItemsCard(modifier: Modifier = Modifier) {
     ElevatedCard(
         onClick = {  },
         modifier =
-            modifier.padding(horizontal = standardPadding)
+            modifier.padding(horizontal = smallPadding)
             .fillMaxWidth()
             .aspectRatio(3f / 1f)
     ) {

@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -35,8 +34,8 @@ import org.quickoline.onboarding.presentation.viewmodel.OnBoardingUiEvents
 import org.quickoline.onboarding.presentation.viewmodel.OnBoardingUiStates
 import org.quickoline.ui.R
 import org.quickoline.ui.components.QuickolineLogo
-import org.quickoline.ui.theme.moderatePadding
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.ui.theme.mediumPadding
+import org.quickoline.ui.theme.smallPadding
 import org.quickoline.utils.AutoResizedText
 import org.quickoline.utils.Constants.POLICY_URL
 import org.quickoline.utils.HyperlinkText
@@ -45,20 +44,11 @@ import org.quickoline.utils.HyperlinkText
 @Composable
 internal fun WelcomeScreen(
     modifier: Modifier = Modifier,
-    onBoardingUiEvents: (OnBoardingUiEvents) -> Unit,
-    onBoardingUiStates: OnBoardingUiStates,
+    uiEvents: (OnBoardingUiEvents) -> Unit,
+    uiStates: OnBoardingUiStates,
     navigateToDashboard: () -> Unit,
     navigateToPolicy: (String) -> Unit
 ) {
-
-    LaunchedEffect(key1 = onBoardingUiStates) {
-        onBoardingUiEvents(OnBoardingUiEvents.CheckIfOnBoardingIsCompleted)
-        if (
-            onBoardingUiStates.policyAccepted
-            && onBoardingUiStates.userEntryCompleted
-        ) navigateToDashboard()
-    }
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -84,9 +74,9 @@ internal fun WelcomeScreen(
         bottomBar = {
             BottomBarWithButton(
                 btnText = stringResource(R.string.onboarding_get_started) + " ->",
-                enabled = onBoardingUiStates.policyAccepted,
+                enabled = uiStates.isPolicyAccepted,
                 onClick = {
-                    onBoardingUiEvents(OnBoardingUiEvents.SaveUserEntryState)
+                    uiEvents(OnBoardingUiEvents.SaveUserEntryState)
                     navigateToDashboard()
                 }
             )
@@ -124,7 +114,7 @@ internal fun WelcomeScreen(
                     modifier = Modifier.padding(horizontal = 32.dp)
                 )
 
-                Spacer(modifier = Modifier.height(standardPadding))
+                Spacer(modifier = Modifier.height(smallPadding))
 
                 Text(
                     text = stringResource(R.string.onboarding_disc),
@@ -135,7 +125,7 @@ internal fun WelcomeScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(moderatePadding))
+            Spacer(modifier = Modifier.height(mediumPadding))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -143,9 +133,9 @@ internal fun WelcomeScreen(
             ) {
 
                 Checkbox(
-                    checked = onBoardingUiStates.policyAccepted,
+                    checked = uiStates.isPolicyAccepted,
                     onCheckedChange = { state ->
-                        onBoardingUiEvents(OnBoardingUiEvents.SavePolicyState(state))
+                        uiEvents(OnBoardingUiEvents.SavePolicyState(state))
                     }
                 )
 

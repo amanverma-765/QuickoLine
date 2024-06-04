@@ -30,7 +30,7 @@ import org.quickoline.ui.components.SecondaryTopAppBar
 internal fun WebViewScreen(
     modifier: Modifier = Modifier,
     url: String,
-    onNavigateBack: () -> Unit
+    navigateBack: () -> Unit
 ) {
 
     var isLoading by remember { mutableStateOf(true) }
@@ -39,7 +39,7 @@ internal fun WebViewScreen(
         topBar = {
             SecondaryTopAppBar(
                 title = stringResource(R.string.our_policies),
-                onNavigateBack = onNavigateBack
+                onNavigateBack = navigateBack
             )
         }
     ) { innerPadding ->

@@ -17,7 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import org.quickoline.ui.components.QuickSearchBar
 import org.quickoline.ui.components.QuickTopAppBar
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.ui.theme.smallPadding
 import org.quickoline.utils.isScrollingUp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +50,7 @@ internal fun TopBarWithSearchbar(modifier: Modifier = Modifier, lazyState: LazyL
             )
         }
         AnimatedVisibility(visible = lazyState.isScrollingUp()) {
-            Spacer(modifier = Modifier.height(standardPadding))
+            Spacer(modifier = Modifier.height(smallPadding))
         }
     }
 }

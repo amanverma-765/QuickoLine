@@ -1,12 +1,12 @@
-package org.quickoline.onboarding.domain.usecases
+package org.quickoline.home.domain.userentry.usecases
 
 import kotlinx.coroutines.flow.Flow
 import org.quickoline.onboarding.domain.repository.OnBoardingRepository
 
-internal class GetPolicyState(
+internal class GetUserEntryState(
     private val onBoardingRepository: OnBoardingRepository
 ) {
     operator fun invoke(): Flow<Boolean> {
-        return onBoardingRepository.getPolicyState()
+        return onBoardingRepository.getUserEntryState()
     }
 }

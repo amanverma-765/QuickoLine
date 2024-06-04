@@ -17,10 +17,9 @@ fun NavGraphBuilder.webViewGraph(
     composable<WebViewGraph> { backStack ->
 
         val url = backStack.toRoute<WebViewGraph>().url
-
         WebViewScreen(
             url = url,
-            onNavigateBack = {
+            navigateBack = {
                 if (navigator.canNavigate()) navigator.popBackStack()
             }
         )

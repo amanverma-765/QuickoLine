@@ -19,7 +19,6 @@ internal class OnBoardingViewModel(
         when (event) {
             is OnBoardingUiEvents.SaveUserEntryState -> saveUserEntryState()
             is OnBoardingUiEvents.SavePolicyState -> savePolicyState(event.isAccepted)
-            is OnBoardingUiEvents.CheckIfOnBoardingIsCompleted -> checkIfOnBoardingIsCompleted()
         }
     }
 
@@ -38,35 +37,10 @@ internal class OnBoardingViewModel(
             try {
                 onBoardingUseCases.savePolicyState(isAccepted)
                 _onBoardingState.update { state ->
-                    state.copy(policyAccepted = isAccepted)
+                    state.copy(isPolicyAccepted = isAccepted)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-            }
-        }
-    }
-
-    private fun checkIfOnBoardingIsCompleted() {
-        getPolicyState()
-        getUserEntryState()
-    }
-
-    private fun getPolicyState() {
-        viewModelScope.launch {
-            onBoardingUseCases.getPolicyState().collect { isAccepted ->
-                _onBoardingState.update { state ->
-                    state.copy(policyAccepted = isAccepted)
-                }
-            }
-        }
-    }
-
-    private fun getUserEntryState() {
-        viewModelScope.launch {
-            onBoardingUseCases.getUserEntryState().collect { isCompleted ->
-                _onBoardingState.update { state ->
-                    state.copy(userEntryCompleted = isCompleted)
-                }
             }
         }
     }

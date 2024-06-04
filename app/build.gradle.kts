@@ -82,7 +82,6 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.core.coroutines)
-
     implementation(project(":features:onboarding"))
     implementation(project(":features:home"))
     implementation(project(":features:activity"))

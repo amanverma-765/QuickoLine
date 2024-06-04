@@ -15,8 +15,8 @@ import org.quickoline.onboarding.presentation.viewmodel.OnBoardingViewModel
 object OnBoardingGraph
 
 fun NavGraphBuilder.onBoardingGraph(
-    onNavigateToDashboard: () -> Unit,
-    onNavigateToPolicy: (String) -> Unit,
+    navigateToDashboard: () -> Unit,
+    navigateToPolicy: (String) -> Unit,
 ) {
     navigation<OnBoardingGraph>(startDestination = OnBoardingDestinations.Welcome) {
 
@@ -26,10 +26,10 @@ fun NavGraphBuilder.onBoardingGraph(
             val onBoardingState by onBoardingVm.onBoardingState.collectAsState()
 
             WelcomeScreen(
-                onBoardingUiEvents = onBoardingVm::onEvent,
-                onBoardingUiStates = onBoardingState,
-                navigateToDashboard = onNavigateToDashboard,
-                navigateToPolicy = { url -> onNavigateToPolicy(url) }
+                uiEvents = onBoardingVm::onEvent,
+                uiStates = onBoardingState,
+                navigateToDashboard =navigateToDashboard,
+                navigateToPolicy = { url -> navigateToPolicy(url) }
             )
         }
     }

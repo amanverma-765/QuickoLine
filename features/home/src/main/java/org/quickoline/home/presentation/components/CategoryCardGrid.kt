@@ -2,33 +2,38 @@ package org.quickoline.home.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.quickoline.ui.theme.standardPadding
+import org.quickoline.ui.theme.smallPadding
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
-internal fun CategoryCardGrid(modifier: Modifier = Modifier) {
-
+internal fun CategoryCardGrid(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(horizontal = smallPadding)
     ) {
-        FlowRow(
-            verticalArrangement = Arrangement.spacedBy(standardPadding),
-            horizontalArrangement = Arrangement.spacedBy(standardPadding),
-            maxItemsInEachRow = 2,
-            modifier = Modifier
+        LazyVerticalGrid(
+            verticalArrangement = Arrangement.spacedBy(smallPadding),
+            horizontalArrangement = Arrangement.spacedBy(smallPadding),
+            columns = GridCells.Fixed(2),
+            modifier = modifier
+                .fillMaxWidth()
+                .aspectRatio(1f)
         ) {
-            (1..4).forEach {
-                CategoryCard()
+            items(4) {
+                CategoryCard(
+                    onClick = { onClick() }
+                )
             }
         }
     }

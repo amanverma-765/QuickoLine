@@ -45,19 +45,22 @@ fun RootNavHost(
     ) {
 
         onBoardingGraph(
-            onNavigateToDashboard = {
+            navigateToDashboard = {
                 rootNavigator.navigate(HomeGraph) {
                     popUpTo(OnBoardingGraph) { inclusive = true }
                 }
             },
-            onNavigateToPolicy = { url -> rootNavigator.navigate(WebViewGraph(url)) }
+            navigateToPolicy = { url -> rootNavigator.navigate(WebViewGraph(url)) }
         )
 
         webViewGraph(
             navigator = rootNavigator,
         )
 
-        homeGraph(navigator = rootNavigator)
+        homeGraph(
+            navigator = rootNavigator,
+            navigateToOnBoarding = { rootNavigator.navigate(OnBoardingGraph) }
+        )
 
         activityGraph(navigator = rootNavigator)
 

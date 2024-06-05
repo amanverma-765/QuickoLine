@@ -2,7 +2,6 @@ package org.quickoline.home.presentation.viewmodel.userentry
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -24,7 +23,6 @@ internal class UserEntryViewModel(
 
     private fun checkIfOnBoardingIsCompleted() {
         viewModelScope.launch {
-            delay(700)
             getPolicyState()
             getUserEntryState()
         }
@@ -34,7 +32,7 @@ internal class UserEntryViewModel(
         viewModelScope.launch {
             userEntryUseCases.getPolicyState().collect { isAccepted ->
                 _userEntryState.update { state ->
-                    state.copy(isPolicyAccepted = isAccepted)
+                    state.copy(policyNotAccepted = isAccepted.not())
                 }
             }
         }
@@ -44,7 +42,7 @@ internal class UserEntryViewModel(
         viewModelScope.launch {
             userEntryUseCases.getUserEntryState().collect { isCompleted ->
                 _userEntryState.update { state ->
-                    state.copy(isEntryCompleted = isCompleted)
+                    state.copy(entryNotCompleted = isCompleted.not())
                 }
             }
         }

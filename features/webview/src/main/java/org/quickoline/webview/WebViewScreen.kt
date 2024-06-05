@@ -39,7 +39,7 @@ internal fun WebViewScreen(
         topBar = {
             SecondaryTopAppBar(
                 title = stringResource(R.string.our_policies),
-                onNavigateBack = navigateBack
+                navigateBack = { navigateBack() }
             )
         }
     ) { innerPadding ->

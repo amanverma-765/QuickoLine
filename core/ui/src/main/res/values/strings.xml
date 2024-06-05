@@ -11,4 +11,8 @@
     <string name="onboarding_disc">Get your online works done quickly without visiting offline centres.</string>
     <string name="onboarding_get_started">Get Started</string>
     <string name="our_policies">Our Policies</string>
+    <string name="form_filling">Form Filling</string>
+    <string name="legal_work">Legal Work</string>
+    <string name="last_minute">Last Minute</string>
+    <string name="more_services">More Services</string>
 </resources>

@@ -1,5 +1,7 @@
 package org.quickoline.onboarding.navigation
 
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
@@ -20,7 +22,10 @@ fun NavGraphBuilder.onBoardingGraph(
 ) {
     navigation<OnBoardingGraph>(startDestination = OnBoardingDestinations.Welcome) {
 
-        composable<OnBoardingDestinations.Welcome> {
+        composable<OnBoardingDestinations.Welcome>(
+            enterTransition = { slideInVertically { -it } },
+            popExitTransition = { slideOutHorizontally { -it } },
+        ) {
 
             val onBoardingVm = koinViewModel<OnBoardingViewModel>()
             val onBoardingState by onBoardingVm.onBoardingState.collectAsState()
@@ -28,7 +33,7 @@ fun NavGraphBuilder.onBoardingGraph(
             WelcomeScreen(
                 uiEvents = onBoardingVm::onEvent,
                 uiStates = onBoardingState,
-                navigateToDashboard =navigateToDashboard,
+                navigateToDashboard = { navigateToDashboard() },
                 navigateToPolicy = { url -> navigateToPolicy(url) }
             )
         }

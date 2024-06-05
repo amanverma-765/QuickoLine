@@ -18,7 +18,7 @@ fun SecondaryTopAppBar(
     modifier: Modifier = Modifier,
     title: String,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
-    onNavigateBack: () -> Unit
+    navigateBack: () -> Unit
 ) {
     TopAppBar(
         modifier = modifier,
@@ -26,7 +26,7 @@ fun SecondaryTopAppBar(
             Text(text = title)
         },
         navigationIcon = {
-            IconButton(onClick = { onNavigateBack() }) {
+            IconButton(onClick = { navigateBack() }) {
                 Icon(imageVector = Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = "Back")
             }
         },

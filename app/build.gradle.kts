@@ -86,6 +86,7 @@ dependencies {
     implementation(project(":features:home"))
     implementation(project(":features:activity"))
     implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
     implementation(project(":features:webview"))
 
 }

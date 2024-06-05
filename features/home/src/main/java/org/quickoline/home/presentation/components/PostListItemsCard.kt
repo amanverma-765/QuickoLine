@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import org.quickoline.ui.theme.smallPadding
 
 @Composable
-internal fun ListItemsCard(modifier: Modifier = Modifier) {
+internal fun PostListItemsCard(modifier: Modifier = Modifier) {
     ElevatedCard(
         onClick = {  },
         modifier =

@@ -37,7 +37,7 @@ internal class OnBoardingViewModel(
             try {
                 onBoardingUseCases.savePolicyState(isAccepted)
                 _onBoardingState.update { state ->
-                    state.copy(isPolicyAccepted = isAccepted)
+                    state.copy(policyAccepted = isAccepted)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

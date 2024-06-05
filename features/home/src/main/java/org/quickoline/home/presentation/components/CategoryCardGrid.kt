@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import org.quickoline.ui.theme.smallPadding
@@ -15,7 +16,7 @@ import org.quickoline.ui.theme.smallPadding
 @Composable
 internal fun CategoryCardGrid(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: (Category) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -30,9 +31,12 @@ internal fun CategoryCardGrid(
                 .fillMaxWidth()
                 .aspectRatio(1f)
         ) {
-            items(4) {
+            items(categoryCards) { item ->
                 CategoryCard(
-                    onClick = { onClick() }
+                    categoryCard = item,
+                    onClick = { category ->
+                        onClick(category)
+                    }
                 )
             }
         }

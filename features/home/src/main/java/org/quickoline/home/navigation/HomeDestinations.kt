@@ -9,6 +9,6 @@ internal sealed interface HomeDestinations {
     data object Home: HomeDestinations
 
     @Serializable
-    data object PostList: HomeDestinations
+    data class PostList(val category: String): HomeDestinations
 
 }

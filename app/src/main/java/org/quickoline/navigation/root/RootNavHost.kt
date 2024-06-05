@@ -12,6 +12,7 @@ import org.quickoline.home.navigation.HomeGraph
 import org.quickoline.home.navigation.homeGraph
 import org.quickoline.onboarding.navigation.OnBoardingGraph
 import org.quickoline.onboarding.navigation.onBoardingGraph
+import org.quickoline.utils.canNavigate
 import org.quickoline.webview.WebViewGraph
 import org.quickoline.webview.webViewGraph
 
@@ -20,15 +21,6 @@ fun RootNavHost(
     modifier: Modifier = Modifier,
     startDestination: Any
 ) {
-
-
-//        val navVm = viewModel<NavViewModel>()
-//
-//    val rootNavigator = rememberNavController().apply {
-//        addOnDestinationChangedListener { _, destination, _ ->
-//            navVm.destinationChanged(destination)
-//        }
-//    }
 
     val rootNavigator = rememberNavController()
 
@@ -46,11 +38,15 @@ fun RootNavHost(
 
         onBoardingGraph(
             navigateToDashboard = {
-                rootNavigator.navigate(HomeGraph) {
-                    popUpTo(OnBoardingGraph) { inclusive = true }
+                if (rootNavigator.canNavigate()) {
+                    rootNavigator.navigate(HomeGraph) {
+                        popUpTo(OnBoardingGraph) { inclusive = true }
+                    }
                 }
             },
-            navigateToPolicy = { url -> rootNavigator.navigate(WebViewGraph(url)) }
+            navigateToPolicy = { url ->
+                if (rootNavigator.canNavigate()) rootNavigator.navigate(WebViewGraph(url))
+            }
         )
 
         webViewGraph(
@@ -59,7 +55,13 @@ fun RootNavHost(
 
         homeGraph(
             navigator = rootNavigator,
-            navigateToOnBoarding = { rootNavigator.navigate(OnBoardingGraph) }
+            navigateToOnBoarding = {
+                if (rootNavigator.canNavigate()) {
+                    rootNavigator.navigate(OnBoardingGraph) {
+                        popUpTo(HomeGraph) { inclusive = true }
+                    }
+                }
+            }
         )
 
         activityGraph(navigator = rootNavigator)

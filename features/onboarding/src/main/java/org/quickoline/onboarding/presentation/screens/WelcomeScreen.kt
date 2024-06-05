@@ -74,7 +74,7 @@ internal fun WelcomeScreen(
         bottomBar = {
             BottomBarWithButton(
                 btnText = stringResource(R.string.onboarding_get_started) + " ->",
-                enabled = uiStates.isPolicyAccepted,
+                enabled = uiStates.policyAccepted,
                 onClick = {
                     uiEvents(OnBoardingUiEvents.SaveUserEntryState)
                     navigateToDashboard()
@@ -133,7 +133,7 @@ internal fun WelcomeScreen(
             ) {
 
                 Checkbox(
-                    checked = uiStates.isPolicyAccepted,
+                    checked = uiStates.policyAccepted,
                     onCheckedChange = { state ->
                         uiEvents(OnBoardingUiEvents.SavePolicyState(state))
                     }

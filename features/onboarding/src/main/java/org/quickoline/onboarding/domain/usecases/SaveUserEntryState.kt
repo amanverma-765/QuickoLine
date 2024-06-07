@@ -1,6 +1,6 @@
 package org.quickoline.onboarding.domain.usecases
 
-import org.quickoline.onboarding.domain.repository.OnBoardingRepository
+import org.quickoline.onboarding.domain.repositories.OnBoardingRepository
 
 internal class SaveUserEntryState(
     private val onBoardingRepository: OnBoardingRepository

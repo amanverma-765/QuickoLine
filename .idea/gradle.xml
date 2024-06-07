@@ -15,9 +15,10 @@
             <option value="$PROJECT_DIR$/core/utils" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/activity" />
-            <option value="$PROJECT_DIR$/features/home" />
+            <option value="$PROJECT_DIR$/features/dashboard" />
             <option value="$PROJECT_DIR$/features/onboarding" />
             <option value="$PROJECT_DIR$/features/webview" />
+            <option value="$PROJECT_DIR$/supabase" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

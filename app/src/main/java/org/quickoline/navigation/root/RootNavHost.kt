@@ -8,8 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import org.quickoline.activity.navigation.activityGraph
-import org.quickoline.home.navigation.HomeGraph
-import org.quickoline.home.navigation.homeGraph
+import org.quickoline.dashboard.navigation.DashboardGraph
+import org.quickoline.dashboard.navigation.dashboardGraph
 import org.quickoline.onboarding.navigation.OnBoardingGraph
 import org.quickoline.onboarding.navigation.onBoardingGraph
 import org.quickoline.utils.canNavigate
@@ -27,19 +27,17 @@ fun RootNavHost(
     NavHost(
         navController = rootNavigator,
         startDestination = startDestination,
-
         enterTransition = { slideInHorizontally { it } },
         exitTransition = { slideOutHorizontally { -it } },
         popEnterTransition = { slideInHorizontally { -it } },
         popExitTransition = { slideOutHorizontally { it } },
-
         modifier = modifier.fillMaxSize()
     ) {
 
         onBoardingGraph(
             navigateToDashboard = {
                 if (rootNavigator.canNavigate()) {
-                    rootNavigator.navigate(HomeGraph) {
+                    rootNavigator.navigate(DashboardGraph) {
                         popUpTo(OnBoardingGraph) { inclusive = true }
                     }
                 }
@@ -53,12 +51,12 @@ fun RootNavHost(
             navigator = rootNavigator,
         )
 
-        homeGraph(
+        dashboardGraph(
             navigator = rootNavigator,
             navigateToOnBoarding = {
                 if (rootNavigator.canNavigate()) {
                     rootNavigator.navigate(OnBoardingGraph) {
-                        popUpTo(HomeGraph) { inclusive = true }
+                        popUpTo(DashboardGraph) { inclusive = true }
                     }
                 }
             }

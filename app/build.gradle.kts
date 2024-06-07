@@ -83,7 +83,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.core.coroutines)
     implementation(project(":features:onboarding"))
-    implementation(project(":features:home"))
+    implementation(project(":features:dashboard"))
     implementation(project(":features:activity"))
     implementation(project(":core:ui"))
     implementation(project(":core:utils"))

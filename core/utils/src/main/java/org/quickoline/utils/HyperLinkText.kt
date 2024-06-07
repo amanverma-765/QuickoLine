@@ -8,6 +8,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 
+@Suppress("DEPRECATION")
 @Composable
 fun HyperlinkText(
     modifier: Modifier = Modifier,
@@ -40,13 +41,6 @@ fun HyperlinkText(
                 end = endIndex
             )
         }
-//        addStyle(
-//            style = SpanStyle(
-//                fontSize = linkTextStyle.fontSize
-//            ),
-//            start = 0,
-//            end = fullText.length
-//        )
     }
 
     ClickableText(

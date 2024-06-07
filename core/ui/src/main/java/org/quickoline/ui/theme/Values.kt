@@ -2,6 +2,7 @@ package org.quickoline.ui.theme
 
 import androidx.compose.ui.unit.dp
 
+val smallestPadding = 4.dp
 val verySmallPadding = 8.dp
 val smallPadding = 12.dp
 val mediumPadding = 16.dp

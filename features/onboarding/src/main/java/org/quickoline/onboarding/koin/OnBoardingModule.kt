@@ -6,7 +6,7 @@ import org.koin.dsl.module
 import org.quickoline.onboarding.data.local.datastore.PolicyManager
 import org.quickoline.onboarding.data.local.datastore.UserEntryManager
 import org.quickoline.onboarding.data.local.repository.OnBoardingRepositoryImpl
-import org.quickoline.onboarding.domain.repository.OnBoardingRepository
+import org.quickoline.onboarding.domain.repositories.OnBoardingRepository
 import org.quickoline.onboarding.domain.usecases.OnBoardingUseCases
 import org.quickoline.onboarding.domain.usecases.SavePolicyState
 import org.quickoline.onboarding.domain.usecases.SaveUserEntryState

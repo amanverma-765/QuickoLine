@@ -4,7 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.quickoline.home.koin.userEntryModule
+import org.quickoline.dashboard.koin.userEntryModule
 import org.quickoline.onboarding.koin.onBoardingModule
 
 class QuickoLineApp: Application() {

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.core.annotation.KoinExperimentalAPI
-import org.quickoline.home.navigation.HomeGraph
+import org.quickoline.dashboard.navigation.DashboardGraph
 import org.quickoline.navigation.root.RootNavHost
 import org.quickoline.ui.theme.QuickoLineTheme
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
             QuickoLineTheme {
                 KoinAndroidContext {
                     RootNavHost(
-                        startDestination = HomeGraph,
+                        startDestination = DashboardGraph,
                         modifier = Modifier.background(MaterialTheme.colorScheme.background)
                     )
                 }

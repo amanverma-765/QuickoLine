@@ -3,7 +3,7 @@ package org.quickoline.onboarding.data.local.repository
 import kotlinx.coroutines.flow.Flow
 import org.quickoline.onboarding.data.local.datastore.PolicyManager
 import org.quickoline.onboarding.data.local.datastore.UserEntryManager
-import org.quickoline.onboarding.domain.repository.OnBoardingRepository
+import org.quickoline.onboarding.domain.repositories.OnBoardingRepository
 
 internal class OnBoardingRepositoryImpl(
     private val userEntryManager: UserEntryManager,

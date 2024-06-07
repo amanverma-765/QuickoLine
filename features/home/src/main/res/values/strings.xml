@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="form_filling_services_title">Form Filling Services</string>
-    <string name="legal_services_title">Legal Services</string>
-    <string name="last_minute_services_title">Last Minute Services</string>
-    <string name="more_services_title">More Services</string>
-</resources>

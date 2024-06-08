@@ -1,4 +1,4 @@
-package org.quickoline.model.dto.form_filling
+package org.quickoline.model.remote.form_filling
 
 
 import kotlinx.serialization.SerialName
@@ -15,7 +15,7 @@ data class FormFillingDto(
     @SerialName("id")
     val id: String,
     @SerialName("last_date")
-    val lastDate: String,
+    val lastDate: String?,
     @SerialName("post_name")
     val postName: String,
     @SerialName("post_url")
@@ -27,7 +27,7 @@ data class FormFillingDto(
     @SerialName("src_url")
     val srcUrl: String,
     @SerialName("start_date")
-    val startDate: String,
+    val startDate: String?,
     @SerialName("title")
     val title: String,
     @SerialName("trending")

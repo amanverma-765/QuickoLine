@@ -34,6 +34,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.core.ktx)
     // Preferences DataStore
     implementation(libs.androidx.datastore.preferences)
     // Koin - DI

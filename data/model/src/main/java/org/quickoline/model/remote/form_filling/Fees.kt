@@ -1,4 +1,4 @@
-package org.quickoline.model.dto.form_filling
+package org.quickoline.model.remote.form_filling
 
 
 import kotlinx.serialization.SerialName
@@ -11,13 +11,13 @@ data class Fees(
     @SerialName("fem")
     val fem: Int?,
     @SerialName("gen")
-    val gen: Int,
+    val gen: Int?,
     @SerialName("obc")
-    val obc: Int,
+    val obc: Int?,
     @SerialName("ph")
     val ph: Int?,
     @SerialName("sc")
-    val sc: Int,
+    val sc: Int?,
     @SerialName("st")
-    val st: Int
+    val st: Int?
 )

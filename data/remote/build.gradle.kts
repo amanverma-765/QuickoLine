@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
 android {
@@ -35,9 +36,21 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Koin - DI
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.core.coroutines)
+    // Supabase
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.supabase.postgrest.kt)
+    // Ktor
+//    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+//    implementation(libs.ktor.client.serialization)
+//    implementation(libs.ktor.client.logging)
+//    implementation(libs.ktor.client.content.negotiation)
+    // Ktx - Serialization
+    implementation(libs.kotlinx.serialization.json)
+    implementation(project(":data:model"))
 }

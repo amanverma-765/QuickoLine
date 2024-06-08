@@ -5,11 +5,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LastMinuteDtoItem(
+data class LastMinuteDto(
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("id")
     val id: String,
-    @SerialName("post")
-    val post: String
+    @SerialName("post_id")
+    val postId: String
 )

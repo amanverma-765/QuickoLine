@@ -90,6 +90,7 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":features:webview"))
     implementation(project(":data:local"))
+    implementation(project(":data:remote"))
     implementation(project(":data:repository"))
     implementation(project(":domain"))
 

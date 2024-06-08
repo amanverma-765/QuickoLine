@@ -11,7 +11,7 @@ data class FormFillingDto(
     @SerialName("docs_required")
     val docsRequired: List<String>,
     @SerialName("fees")
-    val fees: Fees,
+    val fees: FeesDto,
     @SerialName("id")
     val id: String,
     @SerialName("last_date")

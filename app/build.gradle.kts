@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
@@ -41,8 +42,8 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+    composeCompiler {
+        enableStrongSkippingMode = true
     }
     packaging {
         resources {
@@ -88,5 +89,8 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:utils"))
     implementation(project(":features:webview"))
+    implementation(project(":data:local"))
+    implementation(project(":data:repository"))
+    implementation(project(":domain"))
 
 }

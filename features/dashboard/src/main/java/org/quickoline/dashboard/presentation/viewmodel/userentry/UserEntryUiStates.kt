@@ -1,8 +1,10 @@
 package org.quickoline.dashboard.presentation.viewmodel.userentry
 
+import org.quickoline.utils.ApiResponse
+
 internal data class UserEntryUiStates(
 
-    val policyNotAccepted: Boolean = false,
-    val entryNotCompleted: Boolean = false
+    val policyResponse: ApiResponse<Boolean> = ApiResponse.Idle,
+    val userEntryResponse: ApiResponse<Boolean> = ApiResponse.Idle
 
 )

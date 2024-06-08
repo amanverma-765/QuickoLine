@@ -6,10 +6,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.quickoline.dashboard.domain.userentry.usecases.UserEntryUseCases
+import org.quickoline.domain.usecase.DataStoreUseCases
+import org.quickoline.utils.Constants.POLICY_KEY
+import org.quickoline.utils.Constants.USER_ENTRY_KEY
 
 internal class UserEntryViewModel(
-    private val userEntryUseCases: UserEntryUseCases
+    private val dataStoreUseCases: DataStoreUseCases
 ): ViewModel() {
 
     private val _userEntryState = MutableStateFlow(UserEntryUiStates())
@@ -30,9 +32,9 @@ internal class UserEntryViewModel(
 
     private fun getPolicyState() {
         viewModelScope.launch {
-            userEntryUseCases.getPolicyState().collect { isAccepted ->
+            dataStoreUseCases.getFromDataStore(key = POLICY_KEY).collect { result ->
                 _userEntryState.update { state ->
-                    state.copy(policyNotAccepted = isAccepted.not())
+                    state.copy(policyResponse = result)
                 }
             }
         }
@@ -40,9 +42,9 @@ internal class UserEntryViewModel(
 
     private fun getUserEntryState() {
         viewModelScope.launch {
-            userEntryUseCases.getUserEntryState().collect { isCompleted ->
+            dataStoreUseCases.getFromDataStore(key = USER_ENTRY_KEY).collect { result ->
                 _userEntryState.update { state ->
-                    state.copy(entryNotCompleted = isCompleted.not())
+                    state.copy(userEntryResponse = result)
                 }
             }
         }

@@ -14,9 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 internal fun BottomBarWithButton(
-    btnText: String,
     enabled: Boolean = true,
     onClick: () -> Unit,
+    content: @Composable () -> Unit
 ) {
 
     BottomAppBar(containerColor = Color.Transparent) {
@@ -29,11 +29,7 @@ internal fun BottomBarWithButton(
                 onClick = onClick,
                 enabled = enabled,
             ) {
-                Text(
-                    text = btnText,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
+                content()
             }
         }
     }

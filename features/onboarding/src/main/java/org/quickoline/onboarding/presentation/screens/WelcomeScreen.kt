@@ -1,5 +1,7 @@
 package org.quickoline.onboarding.presentation.screens
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,14 +15,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -36,6 +45,7 @@ import org.quickoline.ui.R
 import org.quickoline.ui.components.QuickolineLogo
 import org.quickoline.ui.theme.mediumPadding
 import org.quickoline.ui.theme.smallPadding
+import org.quickoline.utils.ApiResponse
 import org.quickoline.utils.AutoResizedText
 import org.quickoline.utils.Constants.POLICY_URL
 import org.quickoline.utils.HyperlinkText
@@ -44,11 +54,60 @@ import org.quickoline.utils.HyperlinkText
 @Composable
 internal fun WelcomeScreen(
     modifier: Modifier = Modifier,
-    uiEvents: (OnBoardingUiEvents) -> Unit,
-    uiStates: OnBoardingUiStates,
+    uiEvent: (OnBoardingUiEvents) -> Unit,
+    uiState: OnBoardingUiStates,
     navigateToDashboard: () -> Unit,
     navigateToPolicy: (String) -> Unit
 ) {
+
+    val btnLoading = remember { mutableStateOf(false) }
+    var checkBoxState by remember(uiState.policyAccepted) { mutableStateOf(uiState.policyAccepted) }
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = uiState.policyResponse) {
+        Log.e("TAG", "WelcomeScreen ${uiState.policyResponse}")
+        when (uiState.policyResponse) {
+            is ApiResponse.Success -> {
+                checkBoxState = false
+                checkBoxState = uiState.policyAccepted
+                return@LaunchedEffect
+            }
+
+            is ApiResponse.Error -> {
+                checkBoxState = false
+                checkBoxState = false
+                Toast.makeText(
+                    context,
+                    uiState.policyResponse.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@LaunchedEffect
+            }
+
+            else -> Unit
+        }
+    }
+
+    LaunchedEffect(key1 = uiState.userEntryResponse) {
+        when (uiState.userEntryResponse) {
+            is ApiResponse.Loading -> btnLoading.value = true
+            is ApiResponse.Idle -> btnLoading.value = false
+            is ApiResponse.Success -> {
+                navigateToDashboard()
+                return@LaunchedEffect
+            }
+
+            is ApiResponse.Error -> {
+                Toast.makeText(
+                    context,
+                    uiState.userEntryResponse.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@LaunchedEffect
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -73,15 +132,20 @@ internal fun WelcomeScreen(
         },
         bottomBar = {
             BottomBarWithButton(
-                btnText = stringResource(R.string.onboarding_get_started) + " ->",
-                enabled = uiStates.policyAccepted,
-                onClick = {
-                    uiEvents(OnBoardingUiEvents.SaveUserEntryState)
-                    navigateToDashboard()
+                enabled = uiState.policyAccepted,
+                onClick = { uiEvent(OnBoardingUiEvents.SaveUserEntryState) }
+            ) {
+                if (btnLoading.value) {
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
+                } else {
+                    Text(
+                        text = stringResource(R.string.onboarding_get_started) + " ->",
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-            )
+            }
         }
-
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -131,14 +195,12 @@ internal fun WelcomeScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(horizontal = 24.dp)
             ) {
-
                 Checkbox(
-                    checked = uiStates.policyAccepted,
+                    checked = checkBoxState,
                     onCheckedChange = { state ->
-                        uiEvents(OnBoardingUiEvents.SavePolicyState(state))
+                        uiEvent(OnBoardingUiEvents.SavePolicyState(state))
                     }
                 )
-
                 HyperlinkText(
                     fullText = "I have read and agree to the Terms & Conditions and Privacy Policy",
                     hyperLinks = mapOf(

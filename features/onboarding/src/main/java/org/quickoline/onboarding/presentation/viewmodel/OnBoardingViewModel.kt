@@ -1,15 +1,18 @@
 package org.quickoline.onboarding.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.quickoline.onboarding.domain.usecases.OnBoardingUseCases
+import org.quickoline.domain.usecase.DataStoreUseCases
+import org.quickoline.utils.Constants.POLICY_KEY
+import org.quickoline.utils.Constants.USER_ENTRY_KEY
 
 internal class OnBoardingViewModel(
-    private val onBoardingUseCases: OnBoardingUseCases
+    private val dataStoreUseCases: DataStoreUseCases
 ) : ViewModel() {
 
     private val _onBoardingState = MutableStateFlow(OnBoardingUiStates())
@@ -24,24 +27,25 @@ internal class OnBoardingViewModel(
 
     private fun saveUserEntryState() {
         viewModelScope.launch {
-            try {
-                onBoardingUseCases.saveUserEntryState()
-            } catch (e: Exception) {
-                e.printStackTrace()
+            dataStoreUseCases.saveToDataStore(data = true, key = USER_ENTRY_KEY).collect { result ->
+                Log.e("TAG", "saveUserEntryState: $result")
+                _onBoardingState.update { uiState ->
+                    uiState.copy(userEntryResponse = result)
+                }
             }
         }
     }
 
     private fun savePolicyState(isAccepted: Boolean) {
         viewModelScope.launch {
-            try {
-                onBoardingUseCases.savePolicyState(isAccepted)
-                _onBoardingState.update { state ->
-                    state.copy(policyAccepted = isAccepted)
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+           dataStoreUseCases.saveToDataStore(data = isAccepted, key = POLICY_KEY).collect { result ->
+               _onBoardingState.update { uiState ->
+                   uiState.copy(
+                       policyAccepted = isAccepted,
+                       policyResponse = result
+                   )
+               }
+           }
         }
     }
 }

@@ -46,9 +46,20 @@ internal val categoryCards = listOf(
     )
 )
 
-internal enum class Category {
-    FORM_FILLING,
-    LEGAL_WORK,
-    LAST_MINUTE,
-    MORE_SERVICES
+internal enum class Category(
+    @StringRes
+    val title: Int,
+) {
+    FORM_FILLING(
+        title = org.quickoline.ui.R.string.form_filling_services_title,
+    ),
+    LEGAL_WORK(
+        title = org.quickoline.ui.R.string.legal_services_title,
+    ),
+    LAST_MINUTE(
+        title = org.quickoline.ui.R.string.last_minute_services_title,
+    ),
+    MORE_SERVICES(
+        title = org.quickoline.ui.R.string.more_services_title,
+    )
 }

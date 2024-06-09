@@ -73,4 +73,5 @@ dependencies {
     // Ktx - Serialization
     implementation(libs.kotlinx.serialization.json)
     implementation(project(":data:model"))
+    implementation(project(":core:utils"))
 }

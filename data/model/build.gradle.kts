@@ -42,4 +42,5 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     // Ktx - Serialization
     implementation(libs.kotlinx.serialization.json)
+    implementation(project(":domain"))
 }

@@ -1,15 +1,15 @@
-package org.quickoline.model.remote.form_filling
+package org.quickoline.model.remote.dto.post
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FormFillingDto(
+data class PublicPostDto(
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("docs_required")
-    val docsRequired: List<String>,
+    val docsRequired: List<String>?,
     @SerialName("fees")
     val fees: FeesDto,
     @SerialName("id")
@@ -17,15 +17,15 @@ data class FormFillingDto(
     @SerialName("last_date")
     val lastDate: String?,
     @SerialName("post_name")
-    val postName: String,
+    val postName: String?,
     @SerialName("post_url")
-    val postUrl: String,
+    val postUrl: String?,
     @SerialName("service_charge")
-    val serviceCharge: Int,
+    val serviceCharge: Int?,
     @SerialName("short_info")
-    val shortInfo: String,
+    val shortInfo: String?,
     @SerialName("src_url")
-    val srcUrl: String,
+    val srcUrl: String?,
     @SerialName("start_date")
     val startDate: String?,
     @SerialName("title")

@@ -20,8 +20,8 @@ import org.quickoline.utils.plus
 @Composable
 internal fun HomeScreen(
     modifier: Modifier = Modifier,
-    uiEvents: (HomeUiEvents) -> Unit,
-    uiStates: HomeUiStates,
+    uiEvent: (HomeUiEvents) -> Unit,
+    uiState: HomeUiStates,
     navigateToPostListScreen: (Category) -> Unit
 ) {
 
@@ -46,9 +46,9 @@ internal fun HomeScreen(
                 )
             }
 
-            items(50) {
-                PostListItemsCard()
-            }
+//            items(50) {
+//                PostListItemsCard()
+//            }
 
         }
     }

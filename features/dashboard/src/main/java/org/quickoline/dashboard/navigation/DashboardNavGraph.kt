@@ -19,6 +19,7 @@ import org.quickoline.dashboard.presentation.components.Category
 import org.quickoline.dashboard.presentation.screens.HomeScreen
 import org.quickoline.dashboard.presentation.screens.PostListScreen
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeViewModel
+import org.quickoline.dashboard.presentation.viewmodel.post.PostViewModel
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryViewModel
 import org.quickoline.utils.ApiResponse
@@ -90,8 +91,8 @@ fun NavGraphBuilder.dashboardGraph(
             val homeVm = viewModel<HomeViewModel>()
             val homeUiState by homeVm.homeUiState.collectAsState()
             HomeScreen(
-                uiStates = homeUiState,
-                uiEvents = homeVm::onEvent,
+                uiState = homeUiState,
+                uiEvent = homeVm::onEvent,
                 navigateToPostListScreen = { category ->
                     if (navigator.canNavigate()) {
                         navigator.navigate(DashboardDestinations.PostList(category.name))
@@ -103,8 +104,12 @@ fun NavGraphBuilder.dashboardGraph(
         composable<DashboardDestinations.PostList> { backStack ->
 
             val category = backStack.toRoute<DashboardDestinations.PostList>().category
+            val postVm = koinViewModel<PostViewModel>()
+            val postUiState by postVm.postUiState.collectAsState()
 
             PostListScreen(
+                uiState = postUiState,
+                uiEvent = postVm::onEvent,
                 category = Category.valueOf(category),
                 navigateBack = { if (navigator.canNavigate()) navigator.popBackStack() }
             )

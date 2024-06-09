@@ -1,5 +1,4 @@
-package org.quickoline.model.remote.last_minute
-
+package org.quickoline.model.remote.dto.post
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

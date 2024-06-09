@@ -1,11 +1,12 @@
-package org.quickoline.model.remote.form_filling
-
+package org.quickoline.model.remote.dto.post
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class FeesDto(
+    @SerialName("all")
+    val all: Int?,
     @SerialName("ews")
     val ews: Int?,
     @SerialName("fem")

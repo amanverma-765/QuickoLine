@@ -2,8 +2,12 @@ package org.quickoline.domain.koin
 
 import org.koin.dsl.module
 import org.quickoline.domain.usecase.DataStoreUseCases
+import org.quickoline.domain.usecase.PublicPostDataUseCases
 import org.quickoline.domain.usecase.datastore.GetFromDataStore
 import org.quickoline.domain.usecase.datastore.SaveToDataStore
+import org.quickoline.domain.usecase.post.GetFormFillingData
+import org.quickoline.domain.usecase.post.GetLastMinuteData
+import org.quickoline.domain.usecase.post.GetLegalServiceData
 
 val useCaseModule = module {
 
@@ -21,4 +25,13 @@ val useCaseModule = module {
             )
         )
     }
+
+    factory {
+        PublicPostDataUseCases(
+            getFormFillingData = GetFormFillingData(publicPostRepository = get()),
+            getLegalServiceData = GetLegalServiceData(publicPostRepository = get()),
+            getLastMinuteData = GetLastMinuteData(publicPostRepository = get())
+        )
+    }
+
 }

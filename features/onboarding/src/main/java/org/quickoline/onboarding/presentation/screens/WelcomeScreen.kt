@@ -91,7 +91,6 @@ internal fun WelcomeScreen(
     LaunchedEffect(key1 = uiState.userEntryResponse) {
         when (uiState.userEntryResponse) {
             is ApiResponse.Loading -> btnLoading.value = true
-            is ApiResponse.Idle -> btnLoading.value = false
             is ApiResponse.Success -> {
                 navigateToDashboard()
                 return@LaunchedEffect
@@ -105,6 +104,7 @@ internal fun WelcomeScreen(
                 ).show()
                 return@LaunchedEffect
             }
+            else -> Unit
         }
     }
 

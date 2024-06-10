@@ -22,6 +22,7 @@ object PublicPostDataMapper {
             shortInfo = shortInfo,
             title = title,
             trending = trending,
+            lastMinute = lastMinute,
             fees = fees.toFeesData()
         )
     }

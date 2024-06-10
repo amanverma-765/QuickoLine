@@ -24,7 +24,7 @@ internal class HomeViewModel(
 
     private fun fetchTrendingData() {
         viewModelScope.launch {
-            publicPostDataUseCases.getFormFillingData(searchTrending = true).collectLatest { response ->
+            publicPostDataUseCases.getTrendingData().collectLatest { response ->
                 _homeUiState.update { state ->
                     state.copy(trendingResponse = response)
                 }

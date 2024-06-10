@@ -5,13 +5,13 @@ import org.quickoline.domain.model.post.PublicPostData
 import org.quickoline.domain.repository.PublicPostRepository
 import org.quickoline.utils.ApiResponse
 
-class GetLastMinuteData(
+class GetTrendingData(
     private val publicPostRepository: PublicPostRepository
 ) {
     operator fun invoke(): Flow<ApiResponse<List<PublicPostData>>> {
         return publicPostRepository.fetchFormFillingData(
-            searchTrending = false,
-            lastMinute = true
+            searchTrending = true,
+            lastMinute = false
         )
     }
 }

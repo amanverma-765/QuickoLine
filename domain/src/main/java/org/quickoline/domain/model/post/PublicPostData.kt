@@ -13,5 +13,6 @@ data class PublicPostData(
     val srcUrl: String?,
     val startDate: String?,
     val title: String,
-    val trending: Boolean
+    val trending: Boolean,
+    val lastMinute: Boolean
 )

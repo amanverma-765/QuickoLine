@@ -8,6 +8,7 @@ import org.quickoline.domain.usecase.datastore.SaveToDataStore
 import org.quickoline.domain.usecase.post.GetFormFillingData
 import org.quickoline.domain.usecase.post.GetLastMinuteData
 import org.quickoline.domain.usecase.post.GetLegalServiceData
+import org.quickoline.domain.usecase.post.GetTrendingData
 
 val useCaseModule = module {
 
@@ -30,7 +31,8 @@ val useCaseModule = module {
         PublicPostDataUseCases(
             getFormFillingData = GetFormFillingData(publicPostRepository = get()),
             getLegalServiceData = GetLegalServiceData(publicPostRepository = get()),
-            getLastMinuteData = GetLastMinuteData(publicPostRepository = get())
+            getLastMinuteData = GetLastMinuteData(publicPostRepository = get()),
+            getTrendingData = GetTrendingData(publicPostRepository = get())
         )
     }
 

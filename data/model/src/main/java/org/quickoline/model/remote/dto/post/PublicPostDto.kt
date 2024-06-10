@@ -31,5 +31,7 @@ data class PublicPostDto(
     @SerialName("title")
     val title: String,
     @SerialName("trending")
-    val trending: Boolean
+    val trending: Boolean,
+    @SerialName("last_minute")
+    val lastMinute: Boolean
 )

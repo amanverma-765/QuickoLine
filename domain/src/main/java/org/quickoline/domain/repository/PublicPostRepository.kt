@@ -6,7 +6,6 @@ import org.quickoline.utils.ApiResponse
 
 
 interface PublicPostRepository {
-    fun fetchFormFillingData(searchTrending: Boolean): Flow<ApiResponse<List<PublicPostData>>>
+    fun fetchFormFillingData(searchTrending: Boolean, lastMinute: Boolean): Flow<ApiResponse<List<PublicPostData>>>
     fun fetchLegalServiceData(): Flow<ApiResponse<List<PublicPostData>>>
-    fun fetchLastMinuteData(): Flow<ApiResponse<List<PublicPostData>>>
 }

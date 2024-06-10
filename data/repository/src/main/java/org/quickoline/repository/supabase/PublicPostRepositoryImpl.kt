@@ -10,14 +10,21 @@ import org.quickoline.utils.ApiResponse
 
 class PublicPostRepositoryImpl(
     private val supabasePublicDataSource: SupabasePublicDataSource
-): PublicPostRepository {
-    override fun fetchFormFillingData(searchTrending: Boolean): Flow<ApiResponse<List<PublicPostData>>> {
-        return supabasePublicDataSource.fetchFormFillingData(searchTrending).map { response ->
+) : PublicPostRepository {
+    override fun fetchFormFillingData(
+        searchTrending: Boolean,
+        lastMinute: Boolean
+    ): Flow<ApiResponse<List<PublicPostData>>> {
+        return supabasePublicDataSource.fetchFormFillingData(
+            searchTrending = searchTrending,
+            lastMinute = lastMinute
+        ).map { response ->
             when (response) {
                 is ApiResponse.Success -> {
                     val formFillingData = response.data.map { it.toPublicPostData() }
                     ApiResponse.Success(formFillingData)
                 }
+
                 is ApiResponse.Error -> ApiResponse.Error(response.message)
                 is ApiResponse.Loading -> ApiResponse.Loading
             }
@@ -31,19 +38,7 @@ class PublicPostRepositoryImpl(
                     val legalServiceData = response.data.map { it.toPublicPostData() }
                     ApiResponse.Success(legalServiceData)
                 }
-                is ApiResponse.Error -> ApiResponse.Error(response.message)
-                is ApiResponse.Loading -> ApiResponse.Loading
-            }
-        }
-    }
 
-    override fun fetchLastMinuteData(): Flow<ApiResponse<List<PublicPostData>>> {
-        return supabasePublicDataSource.fetchLastMinuteData().map { response ->
-            when (response) {
-                is ApiResponse.Success -> {
-                    val formFillingData = response.data.map { it.toPublicPostData() }
-                    ApiResponse.Success(formFillingData)
-                }
                 is ApiResponse.Error -> ApiResponse.Error(response.message)
                 is ApiResponse.Loading -> ApiResponse.Loading
             }

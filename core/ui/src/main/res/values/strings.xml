@@ -19,4 +19,5 @@
     <string name="legal_services_title">Legal Services</string>
     <string name="last_minute_services_title">Last Minute Services</string>
     <string name="more_services_title">More Services</string>
+    <string name="something_went_wrong">Something Went Wrong!</string>
 </resources>

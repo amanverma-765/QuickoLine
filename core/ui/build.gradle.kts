@@ -60,4 +60,6 @@ dependencies {
     implementation(libs.androidx.material.icons.extended.android)
     // Material Kolor
     implementation(libs.material.kolor)
+    // Shimmer Loading
+    implementation(libs.compose.shimmer)
 }

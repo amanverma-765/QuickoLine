@@ -1,5 +1,6 @@
 package org.quickoline.dashboard.presentation.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,50 +9,70 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import org.quickoline.dashboard.R
 import org.quickoline.domain.model.post.PublicPostData
 import org.quickoline.ui.theme.smallPadding
+import org.quickoline.ui.theme.smallestPadding
 import org.quickoline.ui.theme.verySmallPadding
 
 @Composable
 internal fun PostListItemsCard(
     modifier: Modifier = Modifier,
-    postData: PublicPostData
+    postData: PublicPostData,
+    category: Category
 ) {
-    ElevatedCard(
+    OutlinedCard(
         onClick = {},
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .sizeIn(minHeight = 80.dp, maxHeight = 100.dp)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .height(100.dp)
                 .padding(smallPadding),
             horizontalArrangement = Arrangement.Start
         ) {
 
-            Card(
+            ElevatedCard(
                 modifier = Modifier
                     .fillMaxHeight()
                     .aspectRatio(1f)
-            ) {}
-
-            Spacer(modifier = Modifier.width(verySmallPadding))
-
+            ) {
+               Image(
+                   modifier = Modifier.padding(smallPadding),
+                   painter = painterResource(
+                       id = when (category) {
+                           Category.FORM_FILLING -> R.drawable.form_filling
+                           Category.LEGAL_WORK -> R.drawable.legal_work
+                           Category.LAST_MINUTE -> R.drawable.last_minute
+                           Category.MORE_SERVICES -> R.drawable.extra_service
+                       }
+                   ),
+                   colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+                   contentDescription = "",
+               )
+            }
+            Spacer(modifier = Modifier.width(smallestPadding))
             Column(
                 verticalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
@@ -62,35 +83,27 @@ internal fun PostListItemsCard(
                     text = postData.title,
                     maxLines = 1,
                     style = MaterialTheme.typography.titleSmall,
-                    overflow = TextOverflow.Ellipsis,
+                    overflow = TextOverflow.Clip,
                 )
-                postData.postName?.let {
+                Spacer(modifier = Modifier.height(smallestPadding))
+                postData.postName?.let { data ->
                     Text(
-                        text = postData.postName ?: "",
+                        text = data,
                         style = MaterialTheme.typography.bodySmall,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,
-                        softWrap = true,
                         modifier = Modifier.alpha(.7f)
                     )
                 }
-                Row(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "start: ${postData.startDate ?: "∞"}",
-                        style = MaterialTheme.typography.labelSmall,
-                        modifier = Modifier.alpha(.5f)
-                    )
-                    Text(
-                        text = "end: ${postData.lastDate ?: "∞"}",
-                        style = MaterialTheme.typography.labelSmall,
-                        modifier = Modifier.alpha(.5f)
-                    )
-                }
+                Spacer(modifier = Modifier.height(smallestPadding))
+                Text(
+                    text = "Last date: ${postData.lastDate ?: "∞"}",
+                    style = MaterialTheme.typography.labelSmall,
+                    textAlign = TextAlign.End,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .7f),
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }

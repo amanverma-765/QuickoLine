@@ -8,7 +8,7 @@ import org.quickoline.utils.ApiResponse
 class GetFormFillingData(
     private val publicPostRepository: PublicPostRepository
 ) {
-    operator fun invoke(): Flow<ApiResponse<List<PublicPostData>>> {
-        return publicPostRepository.fetchFormFillingData()
+    operator fun invoke(searchTrending: Boolean = false): Flow<ApiResponse<List<PublicPostData>>> {
+        return publicPostRepository.fetchFormFillingData(searchTrending)
     }
 }

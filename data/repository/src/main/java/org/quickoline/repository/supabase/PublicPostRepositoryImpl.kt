@@ -11,8 +11,8 @@ import org.quickoline.utils.ApiResponse
 class PublicPostRepositoryImpl(
     private val supabasePublicDataSource: SupabasePublicDataSource
 ): PublicPostRepository {
-    override fun fetchFormFillingData(): Flow<ApiResponse<List<PublicPostData>>> {
-        return supabasePublicDataSource.fetchFormFillingData().map { response ->
+    override fun fetchFormFillingData(searchTrending: Boolean): Flow<ApiResponse<List<PublicPostData>>> {
+        return supabasePublicDataSource.fetchFormFillingData(searchTrending).map { response ->
             when (response) {
                 is ApiResponse.Success -> {
                     val formFillingData = response.data.map { it.toPublicPostData() }

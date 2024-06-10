@@ -10,11 +10,15 @@ import org.quickoline.utils.ApiResponse
 
 class SupabasePublicDataSource(private val supabaseClient: SupabaseClient) {
 
-    fun fetchFormFillingData(): Flow<ApiResponse<List<PublicPostDto>>> {
+    fun fetchFormFillingData(searchTrending: Boolean): Flow<ApiResponse<List<PublicPostDto>>> {
         return flow {
             emit(ApiResponse.Loading)
             try {
-                val res = supabaseClient.postgrest["form_filling"].select()
+                val res = supabaseClient.postgrest["form_filling"].select() {
+                    if (searchTrending) filter {
+                        PublicPostDto::trending eq true
+                    }
+                }
                 val data = res.decodeList<PublicPostDto>()
                 emit(ApiResponse.Success(data))
             } catch (e: Exception) {

@@ -22,7 +22,6 @@ internal class PostViewModel(
             is PostUiEvents.FetchPostData -> fetchPostData(event.category)
         }
     }
-
     private fun fetchPostData(category: Category) {
         viewModelScope.launch {
             val responseFlow = when (category) {

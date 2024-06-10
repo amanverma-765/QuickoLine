@@ -88,7 +88,7 @@ fun NavGraphBuilder.dashboardGraph(
                 }
             }
 
-            val homeVm = viewModel<HomeViewModel>()
+            val homeVm = koinViewModel<HomeViewModel>()
             val homeUiState by homeVm.homeUiState.collectAsState()
             HomeScreen(
                 uiState = homeUiState,

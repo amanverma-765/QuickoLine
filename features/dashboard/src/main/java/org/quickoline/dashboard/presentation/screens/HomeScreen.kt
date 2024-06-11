@@ -31,7 +31,8 @@ internal fun HomeScreen(
     modifier: Modifier = Modifier,
     uiEvent: (HomeUiEvents) -> Unit,
     uiState: HomeUiStates,
-    navigateToPostListScreen: (Category) -> Unit
+    navigateToPostListScreen: (Category) -> Unit,
+    navigateToPostDetail: () -> Unit
 ) {
 
     val lazyState = rememberLazyListState()
@@ -66,14 +67,17 @@ internal fun HomeScreen(
                         }
                     }
                 }
+
                 is ApiResponse.Loading -> {
                     items(15) { PostListCardShimmer() }
                 }
+
                 is ApiResponse.Success -> {
                     items(response.data) { data ->
                         PostListItemsCard(
                             postData = data,
-                            category = Category.MORE_SERVICES
+                            category = Category.MORE_SERVICES,
+                            navigateToPostDetail = { navigateToPostDetail() }
                         )
                     }
                 }

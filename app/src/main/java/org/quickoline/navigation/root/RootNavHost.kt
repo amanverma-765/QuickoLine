@@ -5,19 +5,18 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import org.quickoline.activity.navigation.activityGraph
+import org.quickoline.activity.navigation.navigateToActivityGraph
 import org.quickoline.dashboard.navigation.DashboardGraph
 import org.quickoline.dashboard.navigation.dashboardGraph
 import org.quickoline.dashboard.navigation.navigateToDashBoardGraph
+import org.quickoline.navigation.tab.bottomNavGraph
 import org.quickoline.onboarding.navigation.OnBoardingGraph
 import org.quickoline.onboarding.navigation.navigateToOnBoardingGraph
 import org.quickoline.onboarding.navigation.onBoardingGraph
-import org.quickoline.utils.canNavigate
-import org.quickoline.webview.WebViewGraph
 import org.quickoline.webview.navigateToWebViewGraph
 import org.quickoline.webview.webViewGraph
 
@@ -38,6 +37,13 @@ fun RootNavHost(
         popExitTransition = { slideOutHorizontally { it } },
         modifier = modifier.fillMaxSize()
     ) {
+
+        bottomNavGraph(
+            navigator = rootNavigator,
+            navigateToDashboard = { rootNavigator.navigateToDashBoardGraph() },
+            navigateToActivity = { rootNavigator.navigateToActivityGraph() },
+            navigateToDocs = { rootNavigator.navigateToActivityGraph() }
+        )
 
         onBoardingGraph(
             navigateToDashboard = {

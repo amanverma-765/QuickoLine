@@ -37,10 +37,11 @@ import org.quickoline.ui.theme.verySmallPadding
 internal fun PostListItemsCard(
     modifier: Modifier = Modifier,
     postData: PublicPostData,
-    category: Category
+    category: Category,
+    navigateToPostDetail: () -> Unit
 ) {
     OutlinedCard(
-        onClick = {},
+        onClick = { navigateToPostDetail() },
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()

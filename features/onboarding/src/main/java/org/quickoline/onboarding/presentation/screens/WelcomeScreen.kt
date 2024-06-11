@@ -38,10 +38,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.quickoline.onboarding.presentation.components.BottomBarWithButton
 import org.quickoline.onboarding.presentation.viewmodel.OnBoardingUiEvents
 import org.quickoline.onboarding.presentation.viewmodel.OnBoardingUiStates
 import org.quickoline.ui.R
+import org.quickoline.ui.components.BottomBarWithButton
 import org.quickoline.ui.components.QuickolineLogo
 import org.quickoline.ui.theme.mediumPadding
 import org.quickoline.ui.theme.smallPadding

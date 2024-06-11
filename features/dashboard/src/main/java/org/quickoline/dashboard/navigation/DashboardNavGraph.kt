@@ -17,6 +17,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import org.quickoline.dashboard.presentation.components.Category
 import org.quickoline.dashboard.presentation.screens.HomeScreen
+import org.quickoline.dashboard.presentation.screens.PostDetailScreen
 import org.quickoline.dashboard.presentation.screens.PostListScreen
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeViewModel
 import org.quickoline.dashboard.presentation.viewmodel.post.PostViewModel
@@ -62,6 +63,7 @@ fun NavGraphBuilder.dashboardGraph(
                         navigateToOnBoarding()
                         return@LaunchedEffect
                     }
+
                     is ApiResponse.Success -> {
                         // Check the user entry response state
                         when (val entry = userEntryState.userEntryResponse) {
@@ -81,9 +83,11 @@ fun NavGraphBuilder.dashboardGraph(
                                 }
                                 return@LaunchedEffect
                             }
+
                             else -> return@LaunchedEffect
                         }
                     }
+
                     else -> return@LaunchedEffect
                 }
             }
@@ -96,6 +100,11 @@ fun NavGraphBuilder.dashboardGraph(
                 navigateToPostListScreen = { category ->
                     if (navigator.canNavigate()) {
                         navigator.navigate(DashboardDestinations.PostList(category.name))
+                    }
+                },
+                navigateToPostDetail = {
+                    if (navigator.canNavigate()) {
+                        navigator.navigate(DashboardDestinations.PostDetail)
                     }
                 }
             )
@@ -111,6 +120,18 @@ fun NavGraphBuilder.dashboardGraph(
                 uiState = postUiState,
                 uiEvent = postVm::onEvent,
                 category = Category.valueOf(category),
+                navigateToPostDetail = {
+                    if (navigator.canNavigate()) {
+                        navigator.navigate(DashboardDestinations.PostDetail)
+                    }
+                },
+                navigateBack = { if (navigator.canNavigate()) navigator.popBackStack() }
+            )
+        }
+
+        composable<DashboardDestinations.PostDetail> { backStack ->
+
+            PostDetailScreen(
                 navigateBack = { if (navigator.canNavigate()) navigator.popBackStack() }
             )
         }

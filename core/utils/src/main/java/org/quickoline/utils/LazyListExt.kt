@@ -24,5 +24,5 @@ fun LazyListState.isScrollingUp(): Boolean {
                 previousScrollOffset = firstVisibleItemScrollOffset
             }
         }
-    }.value
+    }.value.not()
 }

@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.core.coroutines)
+    // Material Extended Icons
+    implementation(libs.androidx.material.icons.extended.android)
     implementation(project(":core:ui"))
     implementation(project(":core:utils"))
     implementation(project(":features:onboarding"))

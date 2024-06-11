@@ -29,6 +29,7 @@ internal fun PostListScreen(
     category: Category,
     uiState: PostUiStates,
     uiEvent: (PostUiEvents) -> Unit,
+    navigateToPostDetail: () -> Unit,
     navigateBack: () -> Unit
 ) {
 
@@ -70,7 +71,11 @@ internal fun PostListScreen(
 
                 is ApiResponse.Success -> {
                     items(response.data) { data ->
-                        PostListItemsCard(postData = data, category = category)
+                        PostListItemsCard(
+                            postData = data,
+                            category = category,
+                            navigateToPostDetail = { navigateToPostDetail() }
+                        )
                     }
                 }
             }

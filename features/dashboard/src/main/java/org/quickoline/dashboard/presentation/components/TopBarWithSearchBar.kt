@@ -22,7 +22,10 @@ import org.quickoline.utils.isScrollingUp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TopBarWithSearchbar(modifier: Modifier = Modifier, lazyState: LazyListState) {
+internal fun TopBarWithSearchbar(
+    modifier: Modifier = Modifier,
+    lazyState: LazyListState
+) {
 
     var isSearchActive by remember { mutableStateOf(false) }
 
@@ -34,7 +37,7 @@ internal fun TopBarWithSearchbar(modifier: Modifier = Modifier, lazyState: LazyL
 
         AnimatedVisibility(visible = !isSearchActive) {
             QuickTopAppBar(
-                containerColor = if (!lazyState.isScrollingUp()) {
+                containerColor = if (lazyState.isScrollingUp()) {
                     TopAppBarDefaults.topAppBarColors().scrolledContainerColor
                 } else {
                     TopAppBarDefaults.topAppBarColors().containerColor
@@ -42,14 +45,14 @@ internal fun TopBarWithSearchbar(modifier: Modifier = Modifier, lazyState: LazyL
             )
         }
 
-        AnimatedVisibility(visible = lazyState.isScrollingUp()) {
+        AnimatedVisibility(visible = lazyState.isScrollingUp().not()) {
             QuickSearchBar(
                 activeState = { state ->
                     isSearchActive = state
                 }
             )
         }
-        AnimatedVisibility(visible = lazyState.isScrollingUp()) {
+        AnimatedVisibility(visible = lazyState.isScrollingUp().not()) {
             Spacer(modifier = Modifier.height(smallPadding))
         }
     }

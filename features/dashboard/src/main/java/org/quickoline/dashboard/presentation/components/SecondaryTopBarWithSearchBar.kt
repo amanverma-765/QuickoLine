@@ -40,24 +40,25 @@ fun SecondaryTopBarWithSearchBar(
         AnimatedVisibility(visible = !isSearchActive) {
             SecondaryTopAppBar(
                 title = title,
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = if (!lazyState.isScrollingUp()) {
-                    TopAppBarDefaults.topAppBarColors().scrolledContainerColor
-                } else {
-                    TopAppBarDefaults.topAppBarColors().containerColor
-                }
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = if (lazyState.isScrollingUp()) {
+                        TopAppBarDefaults.topAppBarColors().scrolledContainerColor
+                    } else {
+                        TopAppBarDefaults.topAppBarColors().containerColor
+                    }
                 ),
                 navigateBack = { navigateBack() }
             )
         }
 
-        AnimatedVisibility(visible = lazyState.isScrollingUp()) {
+        AnimatedVisibility(visible = lazyState.isScrollingUp().not()) {
             QuickSearchBar(
                 activeState = { state ->
                     isSearchActive = state
                 }
             )
         }
-        AnimatedVisibility(visible = lazyState.isScrollingUp()) {
+        AnimatedVisibility(visible = lazyState.isScrollingUp().not()) {
             Spacer(modifier = Modifier.height(smallPadding))
         }
     }

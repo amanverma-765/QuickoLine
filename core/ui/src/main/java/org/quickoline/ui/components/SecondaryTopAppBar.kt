@@ -23,7 +23,10 @@ fun SecondaryTopAppBar(
     TopAppBar(
         modifier = modifier,
         title = {
-            Text(text = title)
+            Text(
+                text = title,
+                maxLines = 1
+            )
         },
         navigationIcon = {
             IconButton(onClick = { navigateBack() }) {

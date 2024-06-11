@@ -38,10 +38,10 @@ internal fun PostListItemsCard(
     modifier: Modifier = Modifier,
     postData: PublicPostData,
     category: Category,
-    navigateToPostDetail: () -> Unit
+    navigateToPostDetail: (PublicPostData) -> Unit
 ) {
     OutlinedCard(
-        onClick = { navigateToPostDetail() },
+        onClick = { navigateToPostDetail(postData) },
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()

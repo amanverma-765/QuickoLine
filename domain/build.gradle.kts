@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlinx.serialization)
 }
 
 android {
@@ -44,6 +45,8 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.core.coroutines)
+    // Ktx - Serialization
+    implementation(libs.kotlinx.serialization.json)
     implementation(project(":core:utils"))
 
 }

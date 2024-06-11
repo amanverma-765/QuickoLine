@@ -48,6 +48,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import org.quickoline.domain.model.post.FeesData
+import org.quickoline.domain.model.post.PublicPostData
 import org.quickoline.ui.components.BottomBarWithButton
 import org.quickoline.ui.components.SecondaryTopAppBar
 import org.quickoline.ui.theme.mediumPadding
@@ -60,6 +62,9 @@ import org.quickoline.utils.plus
 @Composable
 internal fun PostDetailScreen(
     modifier: Modifier = Modifier,
+    postData: PublicPostData,
+    navigateToSource: (String) -> Unit,
+    navigateToWebsite: (String) -> Unit,
     navigateBack: () -> Unit
 ) {
 
@@ -97,7 +102,7 @@ internal fun PostDetailScreen(
                 .verticalScroll(scrollState)
         ) {
             Text(
-                text = "NTA UGC NET / JRF Exam June 2024 Apply Online Form Date Extended",
+                text = postData.postName ?: postData.title,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.primary,
@@ -122,7 +127,7 @@ internal fun PostDetailScreen(
                             ) {
                                 append("Start: ")
                             }
-                            append("01/10/2024")
+                            append(postData.startDate ?: "Active")
                         },
                         modifier = Modifier.padding(smallPadding)
                     )
@@ -141,50 +146,54 @@ internal fun PostDetailScreen(
                             ) {
                                 append("Last: ")
                             }
-                            append("31/12/2024")
+                            append(postData.lastDate ?: "Available Soon")
                         },
                         modifier = Modifier.padding(smallPadding)
                     )
                 }
             }
-            OutlinedCard(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-            ) {
-                Box(modifier = Modifier.padding(smallPadding)) {
-                    Text(
-                        text = buildAnnotatedString {
-                            withStyle(
-                                SpanStyle(
-                                    color = MaterialTheme.colorScheme.primary,
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = MaterialTheme.typography.titleMedium.fontSize
-                                )
-                            ) {
-                                append("Short info: ")
+            postData.shortInfo?.let { info ->
+                OutlinedCard(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
+                    Box(modifier = Modifier.padding(smallPadding)) {
+                        Text(
+                            text = buildAnnotatedString {
+                                withStyle(
+                                    SpanStyle(
+                                        color = MaterialTheme.colorScheme.primary,
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = MaterialTheme.typography.titleMedium.fontSize
+                                    )
+                                ) {
+                                    append("Short info: ")
+                                }
+                                append(info)
                             }
-                            append("National Testing Agency (NTA) has released UGC NET / JRF Exam June 2024 Notification. Those candidates who are interested in this UGC NET June 2024 Exam can apply online from 20 April 2024 to 19 May 2024. Read the notification for NTA UGC NET Exam, eligibility, Subject Details information, Document Required, age limit, How to Apply and all other information.")
-                        }
-                    )
+                        )
+                    }
                 }
             }
-            Text(
-                text = "Documents required: ",
-                color = MaterialTheme.colorScheme.primary,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium
-            )
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(smallPadding),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                docsList.forEach {
-                    FilterChip(
-                        selected = true,
-                        onClick = { },
-                        label = { Text(text = it) }
-                    )
+            postData.docsRequired?.let { documents ->
+                Text(
+                    text = "Documents required: ",
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(smallPadding),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    documents.forEach { doc ->
+                        FilterChip(
+                            selected = true,
+                            onClick = { },
+                            label = { Text(text = doc) }
+                        )
+                    }
                 }
             }
             Card(
@@ -202,7 +211,7 @@ internal fun PostDetailScreen(
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.titleMedium
                     )
-                    feesDataList.forEach {
+                    postData.fees.toList().forEach { (category, fees) ->
                         Row(
                             horizontalArrangement = Arrangement.SpaceBetween,
                             modifier = Modifier.fillMaxWidth()
@@ -214,7 +223,7 @@ internal fun PostDetailScreen(
                                     .weight(1f)
                             ) {
                                 Text(
-                                    text = it.cat,
+                                    text = category,
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                             }
@@ -237,8 +246,8 @@ internal fun PostDetailScreen(
                                     .weight(1f)
                             ) {
                                 Text(
-                                    text = if (it.fees == 0) "Free" else "${it.fees} INR",
-                                    color = if (it.fees == 0) MaterialTheme.colorScheme.primary
+                                    text = if (fees == 0) "Free" else "$fees INR",
+                                    color = if (fees == 0) MaterialTheme.colorScheme.primary
                                     else Color.Unspecified,
                                     style = MaterialTheme.typography.bodyLarge
                                 )
@@ -248,61 +257,26 @@ internal fun PostDetailScreen(
                 }
             }
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
-                OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "More info")
-                    Spacer(modifier = Modifier.width(smallestPadding))
-                    Icon(imageVector = Icons.Rounded.ArrowOutward, contentDescription = "more")
+                postData.srcUrl?.let { source ->
+                    OutlinedButton(
+                        onClick = { navigateToSource(source) }
+                    ) {
+                        Text(text = "More info")
+                        Spacer(modifier = Modifier.width(smallestPadding))
+                        Icon(imageVector = Icons.Rounded.ArrowOutward, contentDescription = "more")
+                    }
                 }
                 Spacer(modifier = Modifier.width(mediumPadding))
-                OutlinedButton(onClick = { /*TODO*/ }) {
-                    Text(text = "Visit")
-                    Spacer(modifier = Modifier.width(smallestPadding))
-                    Icon(imageVector = Icons.Rounded.ArrowOutward, contentDescription = "more")
+                postData.postUrl?.let { postUrl ->
+                    OutlinedButton(
+                        onClick = { navigateToWebsite(postUrl) }
+                    ) {
+                        Text(text = "Visit")
+                        Spacer(modifier = Modifier.width(smallestPadding))
+                        Icon(imageVector = Icons.Rounded.ArrowOutward, contentDescription = "more")
+                    }
                 }
             }
         }
     }
 }
-
-val docsList = listOf(
-    "Aadhar card",
-    "Pan card",
-    "Signature",
-    "Passport size photo",
-    "12th marksheet",
-    "10th marksheet",
-    "Signature",
-)
-
-data class FeesData(
-    val cat: String,
-    val fees: Int
-)
-
-
-val feesDataList = listOf(
-    FeesData(
-        cat = "General",
-        fees = 200
-    ),
-    FeesData(
-        cat = "EWS",
-        fees = 150
-    ),
-    FeesData(
-        cat = "OBC",
-        fees = 150
-    ),
-    FeesData(
-        cat = "SC",
-        fees = 100
-    ),
-    FeesData(
-        cat = "ST",
-        fees = 50
-    ),
-    FeesData(
-        cat = "Female",
-        fees = 0
-    )
-)

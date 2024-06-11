@@ -45,8 +45,8 @@ fun NavGraphBuilder.onBoardingGraph(
             WelcomeScreen(
                 uiEvent = onBoardingVm::onEvent,
                 uiState = onBoardingState,
-                navigateToDashboard = { navigateToDashboard() },
-                navigateToPolicy = { url -> navigateToPolicy(url) }
+                navigateToDashboard = navigateToDashboard,
+                navigateToPolicy = navigateToPolicy
             )
         }
     }

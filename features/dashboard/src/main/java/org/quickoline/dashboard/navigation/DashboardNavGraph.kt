@@ -5,7 +5,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -13,6 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.toRoute
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import org.quickoline.dashboard.presentation.components.Category
@@ -23,6 +24,7 @@ import org.quickoline.dashboard.presentation.viewmodel.home.HomeViewModel
 import org.quickoline.dashboard.presentation.viewmodel.post.PostViewModel
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryViewModel
+import org.quickoline.domain.model.post.PublicPostData
 import org.quickoline.utils.ApiResponse
 import org.quickoline.utils.Constants
 import org.quickoline.utils.canNavigate
@@ -36,6 +38,8 @@ fun NavController.navigateToDashBoardGraph(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.dashboardGraph(
     navigator: NavController,
+    navigateToSource: (String) -> Unit,
+    navigateToWebsite: (String) -> Unit,
     navigateToOnBoarding: () -> Unit
 ) {
     navigation<DashboardGraph>(startDestination = DashboardDestinations.Home) {
@@ -102,9 +106,10 @@ fun NavGraphBuilder.dashboardGraph(
                         navigator.navigate(DashboardDestinations.PostList(category.name))
                     }
                 },
-                navigateToPostDetail = {
+                navigateToPostDetail = { postData ->
+                    val encodedPostData = Json.encodeToString(postData)
                     if (navigator.canNavigate()) {
-                        navigator.navigate(DashboardDestinations.PostDetail)
+                        navigator.navigate(DashboardDestinations.PostDetail(encodedPostData))
                     }
                 }
             )
@@ -120,9 +125,10 @@ fun NavGraphBuilder.dashboardGraph(
                 uiState = postUiState,
                 uiEvent = postVm::onEvent,
                 category = Category.valueOf(category),
-                navigateToPostDetail = {
+                navigateToPostDetail = { postData ->
+                    val encodedPostData = Json.encodeToString(postData)
                     if (navigator.canNavigate()) {
-                        navigator.navigate(DashboardDestinations.PostDetail)
+                        navigator.navigate(DashboardDestinations.PostDetail(encodedPostData))
                     }
                 },
                 navigateBack = { if (navigator.canNavigate()) navigator.popBackStack() }
@@ -131,7 +137,13 @@ fun NavGraphBuilder.dashboardGraph(
 
         composable<DashboardDestinations.PostDetail> { backStack ->
 
+            val postData = backStack.toRoute<DashboardDestinations.PostDetail>().postData
+            val decodedPostData = Json.decodeFromString<PublicPostData>(postData)
+
             PostDetailScreen(
+                postData = decodedPostData,
+                navigateToSource = navigateToSource,
+                navigateToWebsite = navigateToWebsite,
                 navigateBack = { if (navigator.canNavigate()) navigator.popBackStack() }
             )
         }

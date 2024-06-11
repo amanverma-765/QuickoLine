@@ -1,5 +1,8 @@
 package org.quickoline.domain.model.post
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PublicPostData(
     val createdAt: String,
     val docsRequired: List<String>?,

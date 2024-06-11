@@ -1,5 +1,6 @@
 package org.quickoline.webview
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -19,16 +20,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
-import org.quickoline.ui.R
 import org.quickoline.ui.components.SecondaryTopAppBar
 
 
+@SuppressLint("SetJavaScriptEnabled")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun WebViewScreen(
     modifier: Modifier = Modifier,
+    title: String,
     url: String,
     navigateBack: () -> Unit
 ) {
@@ -38,7 +39,7 @@ internal fun WebViewScreen(
     Scaffold(
         topBar = {
             SecondaryTopAppBar(
-                title = stringResource(R.string.our_policies),
+                title = title,
                 navigateBack = { navigateBack() }
             )
         }
@@ -59,7 +60,7 @@ internal fun WebViewScreen(
                         settings.loadWithOverviewMode = true
                         settings.useWideViewPort = true
                         settings.setSupportZoom(true)
-                        settings.javaScriptEnabled
+                        settings.javaScriptEnabled = true
                         webViewClient = object : WebViewClient() {
                             override fun onPageStarted(
                                 view: WebView?,

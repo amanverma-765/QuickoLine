@@ -52,6 +52,7 @@ internal fun TopBarWithSearchbar(
                 }
             )
         }
+
         AnimatedVisibility(visible = lazyState.isScrollingUp().not()) {
             Spacer(modifier = Modifier.height(smallPadding))
         }

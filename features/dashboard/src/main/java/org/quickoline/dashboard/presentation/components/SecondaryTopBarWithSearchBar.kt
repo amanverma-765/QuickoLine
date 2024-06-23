@@ -47,7 +47,7 @@ fun SecondaryTopBarWithSearchBar(
                         TopAppBarDefaults.topAppBarColors().containerColor
                     }
                 ),
-                navigateBack = { navigateBack() }
+                navigateBack = navigateBack
             )
         }
 

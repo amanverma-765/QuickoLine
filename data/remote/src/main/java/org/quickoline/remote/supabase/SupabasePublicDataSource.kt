@@ -23,9 +23,10 @@ class SupabasePublicDataSource(private val supabaseClient: SupabaseClient) {
                 }
                 val data = res.decodeList<PublicPostDto>()
                 emit(ApiResponse.Success(data))
+
             } catch (e: Exception) {
                 e.printStackTrace()
-                emit(ApiResponse.Error(e.message))
+                emit(ApiResponse.Error("Error in fetching data!"))
             }
         }
     }
@@ -34,12 +35,14 @@ class SupabasePublicDataSource(private val supabaseClient: SupabaseClient) {
         return flow {
             emit(ApiResponse.Loading)
             try {
+
                 val res = supabaseClient.postgrest["legal_service"].select()
                 val data = res.decodeList<PublicPostDto>()
                 emit(ApiResponse.Success(data))
+
             } catch (e: Exception) {
                 e.printStackTrace()
-                emit(ApiResponse.Error(e.message))
+                emit(ApiResponse.Error("Error in fetching data!"))
             }
         }
     }

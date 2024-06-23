@@ -105,7 +105,6 @@ internal fun PostDetailScreen(
                 text = postData.postName ?: postData.title,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary,
                 fontWeight = FontWeight.SemiBold
             )
 

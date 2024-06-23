@@ -12,9 +12,6 @@ import org.koin.androidx.compose.KoinAndroidContext
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.quickoline.dashboard.navigation.DashboardGraph
 import org.quickoline.navigation.root.RootNavHost
-import org.quickoline.navigation.tab.BottomNavGraph
-import org.quickoline.onboarding.koin.onBoardingModule
-import org.quickoline.onboarding.navigation.OnBoardingGraph
 import org.quickoline.ui.theme.QuickoLineTheme
 
 class MainActivity : ComponentActivity() {
@@ -35,3 +32,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+

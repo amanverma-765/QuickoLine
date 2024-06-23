@@ -1,7 +1,7 @@
 package org.quickoline.dashboard.presentation.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import org.quickoline.dashboard.presentation.components.Category
 import org.quickoline.dashboard.presentation.components.CategoryCardGrid
@@ -21,7 +22,6 @@ import org.quickoline.dashboard.presentation.components.TopBarWithSearchbar
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeUiStates
 import org.quickoline.domain.model.post.PublicPostData
-import org.quickoline.ui.components.GotErrorScreen
 import org.quickoline.ui.shimmer.PostListCardShimmer
 import org.quickoline.ui.theme.smallPadding
 import org.quickoline.utils.ApiResponse
@@ -37,6 +37,7 @@ internal fun HomeScreen(
 ) {
 
     val lazyState = rememberLazyListState()
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = Unit) {
         uiEvent(HomeUiEvents.FetchTrendingData)
@@ -62,11 +63,8 @@ internal fun HomeScreen(
             }
             when (val response = uiState.trendingResponse) {
                 is ApiResponse.Error -> {
-                    item {
-                        Column(modifier = Modifier.fillParentMaxHeight(.4f)) {
-                            GotErrorScreen()
-                        }
-                    }
+                    Toast.makeText(context, response.message, Toast.LENGTH_SHORT).show()
+                    items(15) { PostListCardShimmer() }
                 }
 
                 is ApiResponse.Loading -> {

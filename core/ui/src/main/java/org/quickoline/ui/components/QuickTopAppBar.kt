@@ -29,10 +29,7 @@ fun QuickTopAppBar(
 ) {
 
     CenterAlignedTopAppBar(
-        modifier = modifier,
-        title = {
-            QuickolineLogo()
-        },
+        title = { QuickolineLogo() },
         navigationIcon = {
             IconButton(
                 onClick = {
@@ -60,13 +57,16 @@ fun QuickTopAppBar(
                     Icon(
                         imageVector = Icons.Rounded.PersonAdd,
                         contentDescription = "login user",
-                        modifier = Modifier.padding(8.dp).alpha(.5f),
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .alpha(.5f),
                     )
 
                     // Profile Picture here
                 }
             }
-        }
+        },
+        modifier = modifier,
     )
 
 }

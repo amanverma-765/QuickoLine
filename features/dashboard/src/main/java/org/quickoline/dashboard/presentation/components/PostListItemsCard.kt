@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
@@ -28,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.quickoline.dashboard.R
-import org.quickoline.domain.model.post.PublicPostData
+import org.quickoline.domain.model.post.PostData
 import org.quickoline.ui.theme.smallPadding
 import org.quickoline.ui.theme.smallestPadding
 import org.quickoline.ui.theme.verySmallPadding
@@ -36,9 +35,9 @@ import org.quickoline.ui.theme.verySmallPadding
 @Composable
 internal fun PostListItemsCard(
     modifier: Modifier = Modifier,
-    postData: PublicPostData,
+    postData: PostData,
     category: Category,
-    navigateToPostDetail: (PublicPostData) -> Unit
+    navigateToPostDetail: (PostData) -> Unit
 ) {
     OutlinedCard(
         onClick = { navigateToPostDetail(postData) },

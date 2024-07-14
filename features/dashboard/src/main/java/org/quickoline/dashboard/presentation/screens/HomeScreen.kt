@@ -21,7 +21,7 @@ import org.quickoline.dashboard.presentation.components.PostListItemsCard
 import org.quickoline.dashboard.presentation.components.TopBarWithSearchbar
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.home.HomeUiStates
-import org.quickoline.domain.model.post.PublicPostData
+import org.quickoline.domain.model.post.PostData
 import org.quickoline.ui.shimmer.PostListCardShimmer
 import org.quickoline.ui.theme.smallPadding
 import org.quickoline.utils.ApiResponse
@@ -33,7 +33,7 @@ internal fun HomeScreen(
     uiEvent: (HomeUiEvents) -> Unit,
     uiState: HomeUiStates,
     navigateToPostListScreen: (Category) -> Unit,
-    navigateToPostDetail: (PublicPostData) -> Unit
+    navigateToPostDetail: (PostData) -> Unit
 ) {
 
     val lazyState = rememberLazyListState()

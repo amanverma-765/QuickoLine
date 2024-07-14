@@ -17,7 +17,7 @@ import org.quickoline.dashboard.presentation.components.PostListItemsCard
 import org.quickoline.dashboard.presentation.components.SecondaryTopBarWithSearchBar
 import org.quickoline.dashboard.presentation.viewmodel.post.PostUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.post.PostUiStates
-import org.quickoline.domain.model.post.PublicPostData
+import org.quickoline.domain.model.post.PostData
 import org.quickoline.ui.components.GotErrorScreen
 import org.quickoline.ui.shimmer.PostListCardShimmer
 import org.quickoline.ui.theme.smallPadding
@@ -30,7 +30,7 @@ internal fun PostListScreen(
     category: Category,
     uiState: PostUiStates,
     uiEvent: (PostUiEvents) -> Unit,
-    navigateToPostDetail: (PublicPostData) -> Unit,
+    navigateToPostDetail: (PostData) -> Unit,
     navigateBack: () -> Unit
 ) {
 

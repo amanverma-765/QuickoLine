@@ -11,14 +11,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/data" />
+            <option value="$PROJECT_DIR$/core/domain" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/utils" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/data/local" />
-            <option value="$PROJECT_DIR$/data/model" />
-            <option value="$PROJECT_DIR$/data/remote" />
-            <option value="$PROJECT_DIR$/data/repository" />
-            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/activity" />
             <option value="$PROJECT_DIR$/features/dashboard" />

@@ -24,7 +24,7 @@ import org.quickoline.dashboard.presentation.viewmodel.home.HomeViewModel
 import org.quickoline.dashboard.presentation.viewmodel.post.PostViewModel
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryUiEvents
 import org.quickoline.dashboard.presentation.viewmodel.userentry.UserEntryViewModel
-import org.quickoline.domain.model.post.PublicPostData
+import org.quickoline.domain.model.post.PostData
 import org.quickoline.utils.ApiResponse
 import org.quickoline.utils.Constants
 import org.quickoline.utils.canNavigate
@@ -138,7 +138,7 @@ fun NavGraphBuilder.dashboardGraph(
         composable<DashboardDestinations.PostDetail> { backStack ->
 
             val postData = backStack.toRoute<DashboardDestinations.PostDetail>().postData
-            val decodedPostData = Json.decodeFromString<PublicPostData>(postData)
+            val decodedPostData = Json.decodeFromString<PostData>(postData)
 
             PostDetailScreen(
                 postData = decodedPostData,

@@ -72,5 +72,5 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:utils"))
     implementation(project(":features:onboarding"))
-    implementation(project(":domain"))
+    implementation(project(":core:domain"))
 }

@@ -5,11 +5,11 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.quickoline.dashboard.koin.dashboardModule
+import org.quickoline.data.koin.localDatabaseModule
+import org.quickoline.data.koin.remoteDatabaseModule
+import org.quickoline.data.koin.repositoryModule
 import org.quickoline.domain.koin.useCaseModule
-import org.quickoline.remote.koin.supabaseModule
-import org.quickoline.local.koin.localDataModule
 import org.quickoline.onboarding.koin.onBoardingModule
-import org.quickoline.repository.koin.repositoryModule
 
 class QuickoLineApp: Application() {
 
@@ -21,10 +21,10 @@ class QuickoLineApp: Application() {
             modules(
                 onBoardingModule,
                 dashboardModule,
-                localDataModule,
+                localDatabaseModule,
                 repositoryModule,
                 useCaseModule,
-                supabaseModule
+                remoteDatabaseModule
             )
         }
     }

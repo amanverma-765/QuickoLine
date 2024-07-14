@@ -12,7 +12,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import org.quickoline.activity.navigation.navigateToActivityGraph
 import org.quickoline.dashboard.navigation.navigateToDashBoardGraph
 import org.quickoline.navigation.tab.components.BottomNavigationBar
 import org.quickoline.navigation.tab.components.navigationTabs
@@ -53,8 +52,8 @@ fun NavGraphBuilder.bottomNavGraph(
             ) { page ->
                 when (page) {
                     0 -> navigator.navigateToDashBoardGraph()
-                    1 -> navigator.navigateToActivityGraph()
-                    2 -> navigator.navigateToActivityGraph()
+//                    1 -> navigator.navigateToActivityGraph()
+//                    2 -> navigator.navigateToActivityGraph()
                 }
             }
         }

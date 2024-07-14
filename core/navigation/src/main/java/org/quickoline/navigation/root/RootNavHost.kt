@@ -8,7 +8,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import org.quickoline.activity.navigation.activityGraph
 import org.quickoline.dashboard.navigation.DashboardGraph
 import org.quickoline.dashboard.navigation.dashboardGraph
 import org.quickoline.dashboard.navigation.navigateToDashBoardGraph
@@ -60,8 +59,6 @@ fun RootNavHost(
             navigateToSource = { url -> rootNavigator.navigateToWebViewGraph(url = url) },
             navigateToWebsite = { url -> rootNavigator.navigateToWebViewGraph(url = url) }
         )
-
-        activityGraph(navigator = rootNavigator)
 
     }
 }

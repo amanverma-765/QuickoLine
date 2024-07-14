@@ -7,10 +7,10 @@ plugins {
 
 android {
     namespace = "org.quickoline.navigation"
-    compileSdk = 34
+    compileSdk = ProjectConfig.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
+        minSdk = ProjectConfig.MIN_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -18,20 +18,25 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = ProjectConfig.IS_MINIFY_ENABLED
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = ProjectConfig.JAVA_VERSION
+        targetCompatibility = ProjectConfig.JAVA_VERSION
     }
-    kotlinOptions { jvmTarget = "1.8" }
-    buildFeatures { compose = true }
-    composeCompiler { enableStrongSkippingMode = true }
+    kotlinOptions {
+        jvmTarget = ProjectConfig.JVM_TARGET
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeCompiler {
+        enableStrongSkippingMode = true
+    }
 }
 
 dependencies {
@@ -58,7 +63,6 @@ dependencies {
     implementation(libs.androidx.material.icons.extended.android)
     implementation(project(":features:onboarding"))
     implementation(project(":features:dashboard"))
-    implementation(project(":features:activity"))
     implementation(project(":features:webview"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui"))

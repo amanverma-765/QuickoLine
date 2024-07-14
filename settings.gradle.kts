@@ -22,7 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "QuickoLine"
 include(":app")
 include(":features:onboarding")
-include(":features:activity")
 include(":core:ui")
 include(":features:dashboard")
 include(":core:utils")
